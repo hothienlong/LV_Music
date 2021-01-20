@@ -9,6 +9,8 @@ import io.reactivex.rxjava3.core.Maybe;
 import retrofit2.http.GET;
 
 public interface ApiRequest {
-    @GET("Server/all_songs.php")
+//    @GET("Server/all_songs.php")
+//    Maybe<ApiResponse<List<Song>>> getSongs();
+    @GET("apiLV_Music/all_songs.php")
     Maybe<ApiResponse<List<Song>>> getSongs();
 }
