@@ -1,11 +1,10 @@
 package com.example.lv_music.Repository;
 
-import android.util.Log;
-
-import androidx.lifecycle.MutableLiveData;
+import android.location.Address;
 
 import com.example.lv_music.Api.ApiRequest;
 import com.example.lv_music.Api.RetrofitInit;
+import com.example.lv_music.Model.Advertisement;
 import com.example.lv_music.Model.ApiResponse;
 import com.example.lv_music.Model.Song;
 
@@ -13,28 +12,25 @@ import java.util.List;
 
 import io.reactivex.rxjava3.core.Maybe;
 
-public class SongRepository {
-    private static SongRepository mInstance = null;
+public class AdvertisementRepository {
+    private static AdvertisementRepository mInstance = null;
     private ApiRequest mApiRequest = null;
 
     // khởi tạo ApiRequest
-    private SongRepository(){
+    private AdvertisementRepository(){
         mApiRequest = RetrofitInit.getInstance();
     }
 
     // khởi tạo mInstance
-    public static SongRepository getInstance(){
+    public static AdvertisementRepository getInstance(){
         if(mInstance == null){
-            mInstance = new SongRepository();
+            mInstance = new AdvertisementRepository();
         }
         return mInstance;
     }
 
-    public Maybe<ApiResponse<List<Song>>> getAllSongs(){
-        return mApiRequest.getAllSongs();
+    public Maybe<ApiResponse<List<Advertisement>>> getAllAdvertisements(){
+        return mApiRequest.getAllAdvertisements();
     }
 
-    public Maybe<ApiResponse<Song>> getSong(Integer id){
-        return mApiRequest.getSong(id);
-    }
 }
