@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import java.util.ArrayList;
 
+// Dữ liệu: fragment, title -> View
 public class MainViewPagerAdapter extends FragmentPagerAdapter {
     ArrayList<Fragment> fragments = new ArrayList<>();
     ArrayList<String> titles = new ArrayList<>();

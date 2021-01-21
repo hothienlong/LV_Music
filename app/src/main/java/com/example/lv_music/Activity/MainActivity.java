@@ -61,17 +61,6 @@ public class MainActivity extends AppCompatActivity {
 //
 //        mMainViewModel.fetchSong(3);
 
-        // 3 : Fetch all advertisements
-        mMainViewModel.getResponseAllAdvertisements().observe(this, new Observer<ApiResponse<List<Advertisement>>>() {
-            @Override
-            public void onChanged(ApiResponse<List<Advertisement>> listApiResponse) {
-                for(int i=0;i<listApiResponse.getData().size();i++){
-                    Log.d("BBB", listApiResponse.getData().get(i).toString());
-                }
-            }
-        });
-
-        mMainViewModel.fetchAllAdvertisements();
     }
 
     private void init() {

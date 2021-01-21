@@ -4,10 +4,8 @@ public class Advertisement {
 
     private String id;
     private String songId;
-    private String adImage;
+    private String image;
     private String content;
-    private String songImage;
-    private String songLink;
 
     public String getId() {
         return id;
@@ -25,12 +23,12 @@ public class Advertisement {
         this.songId = songId;
     }
 
-    public String getAdImage() {
-        return adImage;
+    public String getImage() {
+        return image;
     }
 
-    public void setAdImage(String adImage) {
-        this.adImage = adImage;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getContent() {
@@ -41,31 +39,13 @@ public class Advertisement {
         this.content = content;
     }
 
-    public String getSongImage() {
-        return songImage;
-    }
-
-    public void setSongImage(String songImage) {
-        this.songImage = songImage;
-    }
-
-    public String getSongLink() {
-        return songLink;
-    }
-
-    public void setSongLink(String songLink) {
-        this.songLink = songLink;
-    }
-
     @Override
     public String toString() {
         return "Advertisement{" +
                 "id='" + id + '\'' +
                 ", songId='" + songId + '\'' +
-                ", adImage='" + adImage + '\'' +
+                ", image='" + image + '\'' +
                 ", content='" + content + '\'' +
-                ", songImage='" + songImage + '\'' +
-                ", songLink='" + songLink + '\'' +
                 '}';
     }
 }
