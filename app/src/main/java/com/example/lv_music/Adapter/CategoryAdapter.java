@@ -39,7 +39,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         Picasso.get()
                 .load(categories.get(position).getImage())
                 .into(holder.imgCategory);
-        holder.tvCategoryName.setText(categories.get(position).getName());
+//        holder.tvCategoryName.setText(categories.get(position).getName());
     }
 
     @Override
@@ -50,13 +50,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     // lưu lại view để khi gọi lại chỉ cần lấy ra => tăng hiệu suất
     class CategoryViewHolder extends RecyclerView.ViewHolder{
         ImageView imgCategory;
-        TextView tvCategoryName;
+//        TextView tvCategoryName;
 
         // ánh xạ
         public CategoryViewHolder(@NonNull View itemView) {
             super(itemView);
             imgCategory = itemView.findViewById(R.id.imgCategory);
-            tvCategoryName = itemView.findViewById(R.id.tvCategoryName);
+//            tvCategoryName = itemView.findViewById(R.id.tvCategoryName);
         }
     }
 

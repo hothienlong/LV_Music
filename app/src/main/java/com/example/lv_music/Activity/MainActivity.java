@@ -13,6 +13,7 @@ import com.example.lv_music.Fragment.AccountFragment;
 import com.example.lv_music.Fragment.CategoryFragment;
 import com.example.lv_music.Fragment.HomeFragment;
 import com.example.lv_music.Fragment.PlaylistFragment;
+import com.example.lv_music.Fragment.SongFragment;
 import com.example.lv_music.Fragment.TopListFragment;
 import com.example.lv_music.Model.Advertisement;
 import com.example.lv_music.Model.ApiResponse;
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         addControls();
         init();
 
-        mMainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+//        mMainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
 
 //        // 1: Fetch all song
 //        mMainViewModel.getResponseAllSongs().observe(this, new Observer<ApiResponse<List<Song>>>() {
@@ -67,15 +68,17 @@ public class MainActivity extends AppCompatActivity {
     private void init() {
         MainViewPagerAdapter adapter = new MainViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new HomeFragment(), "Home");
-        adapter.addFragment(new PlaylistFragment(), "Playlist");
-        adapter.addFragment(new TopListFragment(), "Toplist");
+        adapter.addFragment(new SongFragment(), "Song");
+        adapter.addFragment(new PlaylistFragment(), "Play list");
+        adapter.addFragment(new TopListFragment(), "Top list");
         adapter.addFragment(new AccountFragment(), "Information");
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.getTabAt(0).setIcon(R.drawable.home);
         tabLayout.getTabAt(1).setIcon(R.drawable.playlist);
-        tabLayout.getTabAt(2).setIcon(R.drawable.top);
-        tabLayout.getTabAt(3).setIcon(R.drawable.account);
+        tabLayout.getTabAt(2).setIcon(R.drawable.playlist);
+        tabLayout.getTabAt(3).setIcon(R.drawable.top);
+        tabLayout.getTabAt(4).setIcon(R.drawable.account);
     }
 
     private void addControls() {

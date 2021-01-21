@@ -22,6 +22,7 @@ import com.example.lv_music.R;
 import com.example.lv_music.ViewModel.MainViewModel;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import me.relex.circleindicator.CircleIndicator;
 
