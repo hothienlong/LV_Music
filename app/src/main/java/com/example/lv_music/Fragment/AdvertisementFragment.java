@@ -1,10 +1,12 @@
 package com.example.lv_music.Fragment;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,10 +23,17 @@ import com.example.lv_music.ViewModel.MainViewModel;
 
 import java.util.List;
 
+import me.relex.circleindicator.CircleIndicator;
+
 public class AdvertisementFragment extends Fragment {
     View view;
     MainViewModel mMainViewModel;
     ViewPager viewPager;
+    CircleIndicator circleIndicator;
+
+    int currentItem = 0;
+    Handler handler;
+    Runnable runnable;
 
     @Nullable
     @Override
@@ -37,6 +46,7 @@ public class AdvertisementFragment extends Fragment {
 
     private void addControls() {
         viewPager = view.findViewById(R.id.advertisementViewPager);
+        circleIndicator = view.findViewById(R.id.advertisementIndicator);
     }
 
     private void getData() {
@@ -53,6 +63,22 @@ public class AdvertisementFragment extends Fragment {
 
                 viewPager.setAdapter(advertisementAdapter);
 
+                circleIndicator.setViewPager(viewPager);
+
+                handler = new Handler();
+                runnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        currentItem = viewPager.getCurrentItem();
+                        currentItem++;
+                        if(currentItem >= listApiResponse.getData().size()){
+                            currentItem = 0;
+                        }
+                        viewPager.setCurrentItem(currentItem, true);
+                        handler.postDelayed(runnable, 4000);
+                    }
+                };
+                handler.postDelayed(runnable, 4000);
             }
         });
 

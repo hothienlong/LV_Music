@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/linearlayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -10,4 +9,15 @@
         android:layout_width="match_parent"
         android:layout_height="280dp">
     </androidx.viewpager.widget.ViewPager>
-</LinearLayout>
+
+    <me.relex.circleindicator.CircleIndicator
+        android:id="@+id/advertisementIndicator"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_alignTop="@id/advertisementViewPager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </me.relex.circleindicator.CircleIndicator>
+
+</RelativeLayout>
