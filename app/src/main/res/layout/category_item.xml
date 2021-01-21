@@ -1,42 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="15dp"
-    android:background="#0027FF"
-    android:layout_width="match_parent"
+    android:layout_gravity="center"
+    android:padding="5dp"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardviewAdvertisement"
+        android:id="@+id/cardviewCategory"
         app:cardElevation="5dp"
         app:cardCornerRadius="10dp"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content">
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:id="@+id/imgAdvertisement"
+                android:src="#BB30D3"
+                android:id="@+id/imgCategory"
                 android:scaleType="fitXY"
-                android:layout_width="match_parent"
-                android:layout_height="200dp">
+                android:layout_width="100dp"
+                android:layout_height="56dp">
             </ImageView>
-
             <TextView
-                android:layout_marginBottom="18dp"
-                android:layout_marginLeft="10dp"
-                android:layout_alignBottom="@id/imgAdvertisement"
-                android:id="@+id/tvContentAdvertisement"
-                android:textColor="#ffffff"
+                android:layout_centerInParent="true"
+                android:maxLines="2"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_below="@id/imgCategory"
+                android:textSize="12sp"
+                android:text="Tên thể loại"
+                android:textColor="#000000"
                 android:textStyle="bold"
-                android:textSize="15sp"
-                android:text="Đây là content quảng cáo"
+                android:id="@+id/tvCategoryName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
             </TextView>
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
+
 
 
 </RelativeLayout>

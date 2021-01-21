@@ -10,6 +10,7 @@ import android.util.Log;
 
 import com.example.lv_music.Adapter.MainViewPagerAdapter;
 import com.example.lv_music.Fragment.AccountFragment;
+import com.example.lv_music.Fragment.CategoryFragment;
 import com.example.lv_music.Fragment.HomeFragment;
 import com.example.lv_music.Fragment.PlaylistFragment;
 import com.example.lv_music.Fragment.TopListFragment;

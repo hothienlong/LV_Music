@@ -15,5 +15,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         </fragment>
+        <fragment
+            android:name="com.example.lv_music.Fragment.CategoryFragment"
+            android:id="@+id/fragmentCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </fragment>
     </LinearLayout>
 </ScrollView>

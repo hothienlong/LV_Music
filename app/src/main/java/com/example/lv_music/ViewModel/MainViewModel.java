@@ -8,8 +8,10 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.lv_music.Model.Advertisement;
 import com.example.lv_music.Model.ApiResponse;
+import com.example.lv_music.Model.Category;
 import com.example.lv_music.Model.Song;
 import com.example.lv_music.Repository.AdvertisementRepository;
+import com.example.lv_music.Repository.CategoryRepository;
 import com.example.lv_music.Repository.SongRepository;
 
 import java.util.List;
@@ -27,6 +29,8 @@ public class MainViewModel extends ViewModel {
     private MutableLiveData<ApiResponse<Song>> mSong;
     private AdvertisementRepository mAdvertisementRepository;
     private MutableLiveData<ApiResponse<List<Advertisement>>> mAllAdvertisements;
+    private CategoryRepository mCategoryRepository;
+    private MutableLiveData<ApiResponse<List<Category>>> mAllCategories;
 
     public MainViewModel(){
         mSongRepository = SongRepository.getInstance();
@@ -35,6 +39,9 @@ public class MainViewModel extends ViewModel {
 
         mAdvertisementRepository = AdvertisementRepository.getInstance();
         mAllAdvertisements = new MutableLiveData<>();
+
+        mCategoryRepository = CategoryRepository.getInstance();
+        mAllCategories = new MutableLiveData<>();
     }
 
     public void fetchAllSongs(){
@@ -128,5 +135,36 @@ public class MainViewModel extends ViewModel {
 
     public LiveData<ApiResponse<List<Advertisement>>> getResponseAllAdvertisements(){
         return mAllAdvertisements;
+    }
+
+    public void fetchAllCategories(){
+        mCategoryRepository.getAllCategories()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new MaybeObserver<ApiResponse<List<Category>>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull ApiResponse<List<Category>> listApiResponse) {
+                        mAllCategories.setValue(listApiResponse);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.d("BBB", "Error : " + e.getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    public LiveData<ApiResponse<List<Category>>> getResponseAllCategories(){
+        return mAllCategories;
     }
 }
