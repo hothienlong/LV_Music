@@ -37,4 +37,8 @@ public class SongRepository {
     public Maybe<ApiResponse<Song>> getSong(Integer id){
         return mApiRequest.getSong(id);
     }
+
+    public Maybe<ApiResponse<List<Song>>> getAllSongsCategory(){
+        return mApiRequest.getAllSongsCategory();
+    }
 }

@@ -20,6 +20,9 @@ public interface ApiRequest {
     @GET("apiLV_Music/all_songs.php")
     Maybe<ApiResponse<List<Song>>> getAllSongs();
 
+    @GET("apiLV_Music/all_songs_category.php")
+    Maybe<ApiResponse<List<Song>>> getAllSongsCategory();
+
     @FormUrlEncoded // parse sang dạng form để gửi lên
     @POST("apiLV_Music/song.php")
     Maybe<ApiResponse<Song>> getSong(

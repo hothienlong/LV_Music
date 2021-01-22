@@ -29,6 +29,7 @@ public class LvMusicViewModel extends ViewModel {
     private SongRepository mSongRepository;
     private MutableLiveData<ApiResponse<List<Song>>> mAllSongs;
     private MutableLiveData<ApiResponse<Song>> mSong;
+    private MutableLiveData<ApiResponse<List<Song>>> mAllSongsCategory;
     private AdvertisementRepository mAdvertisementRepository;
     private MutableLiveData<ApiResponse<List<Advertisement>>> mAllAdvertisements;
     private CategoryRepository mCategoryRepository;
@@ -204,5 +205,36 @@ public class LvMusicViewModel extends ViewModel {
 
     public LiveData<ApiResponse<List<SongItem>>> getResponseAllSongItems(){
         return mAllSongItems;
+    }
+
+    public void fetchAllSongsCategory(){
+        mSongRepository.getAllSongsCategory()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new MaybeObserver<ApiResponse<List<Song>>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull ApiResponse<List<Song>> listApiResponse) {
+                        mAllSongsCategory.setValue(listApiResponse);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.d("BBB", "Error : " + e.getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    public LiveData<ApiResponse<List<Song>>> getResponseAllSongsCategory(){
+        return mAllSongsCategory;
     }
 }

@@ -1,5 +1,7 @@
 package com.example.lv_music.Adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +10,8 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.lv_music.Activity.PlaySongActivity;
+import com.example.lv_music.Activity.SongCategoryActivity;
 import com.example.lv_music.Model.Category;
 import com.example.lv_music.R;
 import com.squareup.picasso.Picasso;
@@ -16,6 +20,7 @@ import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> {
 
+    Context context;
     List<Category> categories;
 
     public CategoryAdapter(List<Category> categories) {
@@ -26,7 +31,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     @Override
     public CategoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //ko hỏi parent từ đâu ra (mặc định vậy rồi...)
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        context = parent.getContext();
+        LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.layout_category_item, parent, false);
         return new CategoryViewHolder(view);
     }
@@ -38,6 +44,16 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                 .load(categories.get(position).getImage())
                 .into(holder.imgCategory);
 //        holder.tvCategoryName.setText(categories.get(position).getName());
+
+        // bắt sự kiện click category
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, SongCategoryActivity.class);
+                intent.putExtra("category", categories.get(position));
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
