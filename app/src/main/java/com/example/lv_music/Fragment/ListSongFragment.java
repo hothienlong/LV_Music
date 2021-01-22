@@ -1,7 +1,6 @@
 package com.example.lv_music.Fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +28,6 @@ public class ListSongFragment extends Fragment {
     LvMusicViewModel mLvMusicViewModel;
 
     RecyclerView songItemRecyclerview;
-    Button btnRandom;
 
     @Nullable
     @Override
@@ -68,6 +66,5 @@ public class ListSongFragment extends Fragment {
 
     private void addControls() {
         songItemRecyclerview = view.findViewById(R.id.songItemRecyclerview);
-        btnRandom = view.findViewById(R.id.btnRandom);
     }
 }
