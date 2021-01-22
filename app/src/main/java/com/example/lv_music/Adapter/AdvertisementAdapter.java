@@ -14,7 +14,6 @@ import com.example.lv_music.Model.Advertisement;
 import com.example.lv_music.R;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 // Dữ liệu: Advertisement -> View
@@ -43,7 +42,7 @@ public class AdvertisementAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.advertisement_item, null);
+        View view = inflater.inflate(R.layout.layout_advertisement_item, null);
 
         ImageView imgAdvertisement = view.findViewById(R.id.imgAdvertisement);
         TextView tvContent = view.findViewById(R.id.tvContentAdvertisement);

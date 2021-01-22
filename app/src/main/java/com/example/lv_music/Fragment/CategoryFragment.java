@@ -1,7 +1,6 @@
 package com.example.lv_music.Fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,17 +13,16 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lv_music.Adapter.CategoryAdapter;
-import com.example.lv_music.Model.Advertisement;
 import com.example.lv_music.Model.ApiResponse;
 import com.example.lv_music.Model.Category;
 import com.example.lv_music.R;
-import com.example.lv_music.ViewModel.MainViewModel;
+import com.example.lv_music.ViewModel.LvMusicViewModel;
 
 import java.util.List;
 
 public class CategoryFragment extends Fragment {
     View view;
-    MainViewModel mMainViewModel;
+    LvMusicViewModel mLvMusicViewModel;
     RecyclerView mRcvCategory;
 
     @Nullable
@@ -37,10 +35,10 @@ public class CategoryFragment extends Fragment {
     }
 
     private void getData() {
-        mMainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+        mLvMusicViewModel = ViewModelProviders.of(this).get(LvMusicViewModel.class);
 
         // Fetch all categories
-        mMainViewModel.getResponseAllCategories().observe(getViewLifecycleOwner(), new Observer<ApiResponse<List<Category>>>() {
+        mLvMusicViewModel.getResponseAllCategories().observe(getViewLifecycleOwner(), new Observer<ApiResponse<List<Category>>>() {
             @Override
             public void onChanged(ApiResponse<List<Category>> listApiResponse) {
 //                for(int i=0;i<listApiResponse.getData().size();i++){
@@ -54,7 +52,7 @@ public class CategoryFragment extends Fragment {
             }
         });
 
-        mMainViewModel.fetchAllCategories();
+        mLvMusicViewModel.fetchAllCategories();
     }
 
     private void addControls() {

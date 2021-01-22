@@ -2,11 +2,9 @@ package com.example.lv_music.Fragment;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,16 +17,15 @@ import com.example.lv_music.Adapter.AdvertisementAdapter;
 import com.example.lv_music.Model.Advertisement;
 import com.example.lv_music.Model.ApiResponse;
 import com.example.lv_music.R;
-import com.example.lv_music.ViewModel.MainViewModel;
+import com.example.lv_music.ViewModel.LvMusicViewModel;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 import me.relex.circleindicator.CircleIndicator;
 
 public class AdvertisementFragment extends Fragment {
     View view;
-    MainViewModel mMainViewModel;
+    LvMusicViewModel mLvMusicViewModel;
     ViewPager viewPager;
     CircleIndicator circleIndicator;
 
@@ -51,10 +48,10 @@ public class AdvertisementFragment extends Fragment {
     }
 
     private void getData() {
-        mMainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+        mLvMusicViewModel = ViewModelProviders.of(this).get(LvMusicViewModel.class);
 
         // 3 : Fetch all advertisements
-        mMainViewModel.getResponseAllAdvertisements().observe(getViewLifecycleOwner(), new Observer<ApiResponse<List<Advertisement>>>() {
+        mLvMusicViewModel.getResponseAllAdvertisements().observe(getViewLifecycleOwner(), new Observer<ApiResponse<List<Advertisement>>>() {
             @Override
             public void onChanged(ApiResponse<List<Advertisement>> listApiResponse) {
 //                for(int i=0;i<listApiResponse.getData().size();i++){
@@ -83,6 +80,6 @@ public class AdvertisementFragment extends Fragment {
             }
         });
 
-        mMainViewModel.fetchAllAdvertisements();
+        mLvMusicViewModel.fetchAllAdvertisements();
     }
 }

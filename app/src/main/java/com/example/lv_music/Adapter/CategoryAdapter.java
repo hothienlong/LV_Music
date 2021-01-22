@@ -1,11 +1,9 @@
 package com.example.lv_music.Adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,7 +27,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     public CategoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //ko hỏi parent từ đâu ra (mặc định vậy rồi...)
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.category_item, parent, false);
+        View view = inflater.inflate(R.layout.layout_category_item, parent, false);
         return new CategoryViewHolder(view);
     }
 

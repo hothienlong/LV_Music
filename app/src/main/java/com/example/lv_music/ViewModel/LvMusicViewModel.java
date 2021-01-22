@@ -23,7 +23,7 @@ import io.reactivex.rxjava3.core.Scheduler;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class MainViewModel extends ViewModel {
+public class LvMusicViewModel extends ViewModel {
     private SongRepository mSongRepository;
     private MutableLiveData<ApiResponse<List<Song>>> mAllSongs;
     private MutableLiveData<ApiResponse<Song>> mSong;
@@ -32,7 +32,7 @@ public class MainViewModel extends ViewModel {
     private CategoryRepository mCategoryRepository;
     private MutableLiveData<ApiResponse<List<Category>>> mAllCategories;
 
-    public MainViewModel(){
+    public LvMusicViewModel(){
         mSongRepository = SongRepository.getInstance();
         mAllSongs = new MutableLiveData<>();
         mSong = new MutableLiveData<>();
