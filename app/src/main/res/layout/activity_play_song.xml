@@ -1,10 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#f20"
+    android:weightSum="10"
+    android:padding="5dp"
+    android:orientation="vertical"
+    android:background="@drawable/bg_play_song"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity.PlaySongActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.appcompat.widget.Toolbar
+
+        android:id="@+id/playSongToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/playSongViewPager"
+        android:layout_weight="8"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+    </androidx.viewpager.widget.ViewPager>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:weightSum="10"
+        android:layout_weight="2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+        <LinearLayout
+            android:weightSum="10"
+            android:orientation="horizontal"
+            android:layout_weight="2.5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/imgLikeSong"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_disheart"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+            </ImageView>
+            <SeekBar
+                android:progressTint="#945D89"
+                android:thumbTint="#945D89"
+                android:backgroundTint="#945D89"
+                android:id="@+id/seekbarsong"
+                android:layout_weight="8"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+            </SeekBar>
+            <ImageView
+                android:id="@+id/imgAddPlaylist"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_addplaylist"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+            </ImageView>
+        </LinearLayout>
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_weight="7.5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/imgSuffle"
+                android:src="@drawable/ic_shuffle"
+                android:layout_weight="1"
+                android:layout_width="50dp"
+                android:layout_height="50dp">
+            </ImageView>
+            <ImageView
+                android:id="@+id/imgBackward"
+                android:src="@drawable/ic_backward_button"
+                android:layout_weight="1"
+                android:layout_width="50dp"
+                android:layout_height="50dp">
+            </ImageView>
+            <ImageView
+                android:id="@+id/imgPlaySong"
+                android:src="@drawable/ic_play_button"
+                android:layout_weight="1"
+                android:layout_width="60dp"
+                android:layout_height="60dp">
+            </ImageView>
+            <ImageView
+                android:id="@+id/imgForward"
+                android:src="@drawable/ic_forward_button"
+                android:layout_weight="1"
+                android:layout_width="50dp"
+                android:layout_height="50dp">
+            </ImageView>
+            <ImageView
+                android:id="@+id/imgRepeat"
+                android:src="@drawable/ic_repeat"
+                android:layout_weight="1"
+                android:layout_width="50dp"
+                android:layout_height="50dp">
+            </ImageView>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
