@@ -1,5 +1,6 @@
 package com.example.lv_music.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.lv_music.Activity.PlaySongActivity;
 import com.example.lv_music.Adapter.AdvertisementAdapter;
 import com.example.lv_music.Model.Advertisement;
 import com.example.lv_music.Model.ApiResponse;
@@ -61,6 +63,7 @@ public class AdvertisementFragment extends Fragment {
 
                 viewPager.setAdapter(advertisementAdapter);
 
+                // set circle indicator
                 circleIndicator.setViewPager(viewPager);
 
                 handler = new Handler();
@@ -77,6 +80,7 @@ public class AdvertisementFragment extends Fragment {
                     }
                 };
                 handler.postDelayed(runnable, 4000);
+
             }
         });
 

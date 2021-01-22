@@ -1,5 +1,7 @@
 package com.example.lv_music.Adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,11 +9,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.lv_music.Activity.PlaySongActivity;
 import com.example.lv_music.Model.SongItem;
 import com.example.lv_music.R;
 import com.squareup.picasso.Picasso;
@@ -21,6 +25,7 @@ import java.util.logging.Logger;
 
 public class ListSongAdapter extends RecyclerView.Adapter<ListSongAdapter.SongViewHolder> {
 
+    Context context;
     List<SongItem> songItems;
 
     public ListSongAdapter(List<SongItem> songItems) {
@@ -30,7 +35,8 @@ public class ListSongAdapter extends RecyclerView.Adapter<ListSongAdapter.SongVi
     @NonNull
     @Override
     public SongViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        context = parent.getContext();
+        LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.layout_list_song_item, parent, false);
         return new SongViewHolder(view);
     }
@@ -52,9 +58,18 @@ public class ListSongAdapter extends RecyclerView.Adapter<ListSongAdapter.SongVi
             Picasso.get().load(songItems.get(position).getImage()).into(holder.imgSong);
         }
         catch (IllegalArgumentException e){
-            holder.imgSong.setImageResource(R.drawable.ic_unknown);
+            holder.imgSong.setImageResource(R.drawable.ic_unknown2);
         }
 
+        // bắt sự kiện bấm vào 1 bài hát
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, PlaySongActivity.class);
+                intent.putExtra("song", songItem);
+                context.startActivity(intent);
+            }
+        });
 
     }
 

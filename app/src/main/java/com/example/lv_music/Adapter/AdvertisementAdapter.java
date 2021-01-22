@@ -1,6 +1,7 @@
 package com.example.lv_music.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
+import com.example.lv_music.Activity.PlaySongActivity;
 import com.example.lv_music.Model.Advertisement;
 import com.example.lv_music.R;
 import com.squareup.picasso.Picasso;
@@ -52,6 +54,16 @@ public class AdvertisementAdapter extends PagerAdapter {
 
         container.addView(view); // add view vào view group của context truyền vào (relative layout của advertisement fragment)
 
+
+        // bắt sự kiện click advertisement
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, PlaySongActivity.class);
+                intent.putExtra("advertisement", advertisements.get(position));
+                context.startActivity(intent);
+            }
+        });
         return view;
     }
 }

@@ -1,10 +1,12 @@
 package com.example.lv_music.Model;
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 
-public class SongItem {
+// implements Serializable để putextra đối tượng giữa các activity
+public class SongItem implements Serializable {
 
     private String id;
     private String name;

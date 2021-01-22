@@ -1,6 +1,8 @@
 package com.example.lv_music.Model;
 
-public class Advertisement {
+import java.io.Serializable;
+
+public class Advertisement implements Serializable {
 
     private String id;
     private String songId;
