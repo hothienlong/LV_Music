@@ -4,6 +4,7 @@ import com.example.lv_music.Model.Advertisement;
 import com.example.lv_music.Model.ApiResponse;
 import com.example.lv_music.Model.Category;
 import com.example.lv_music.Model.Song;
+import com.example.lv_music.Model.SongItem;
 
 import java.util.List;
 
@@ -30,4 +31,7 @@ public interface ApiRequest {
 
     @GET("apiLV_Music/all_categories.php")
     Maybe<ApiResponse<List<Category>>> getAllCategories();
+
+    @GET("apiLV_Music/all_song_items.php")
+    Maybe<ApiResponse<List<SongItem>>> getAllSongItems();
 }

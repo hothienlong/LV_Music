@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <androidx.cardview.widget.CardView
+            android:padding="5dp"
+            android:id="@+id/cardviewSong"
+            app:cardElevation="5dp"
+            app:cardCornerRadius="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/imgSong"
+                android:scaleType="fitXY"
+                android:layout_width="70dp"
+                android:layout_height="70dp">
+            </ImageView>
+        </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tvSongName"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:layout_marginTop="7dp"
+        android:layout_marginLeft="7dp"
+        android:layout_toRightOf="@id/cardviewSong"
+        android:textSize="18sp"
+        android:textColor="#000000"
+        android:text="Tên bài hát"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </TextView>
+
+    <TextView
+        android:id="@+id/tvSingerName"
+        android:layout_marginTop="5dp"
+        android:layout_alignLeft="@id/tvSongName"
+        android:layout_below="@id/tvSongName"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textSize="15sp"
+        android:textColor="#000000"
+        android:text="Tên ca sĩ"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </TextView>
+
+</RelativeLayout>

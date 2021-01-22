@@ -10,8 +10,10 @@ import com.example.lv_music.Model.Advertisement;
 import com.example.lv_music.Model.ApiResponse;
 import com.example.lv_music.Model.Category;
 import com.example.lv_music.Model.Song;
+import com.example.lv_music.Model.SongItem;
 import com.example.lv_music.Repository.AdvertisementRepository;
 import com.example.lv_music.Repository.CategoryRepository;
+import com.example.lv_music.Repository.SongItemRepository;
 import com.example.lv_music.Repository.SongRepository;
 
 import java.util.List;
@@ -31,6 +33,8 @@ public class LvMusicViewModel extends ViewModel {
     private MutableLiveData<ApiResponse<List<Advertisement>>> mAllAdvertisements;
     private CategoryRepository mCategoryRepository;
     private MutableLiveData<ApiResponse<List<Category>>> mAllCategories;
+    private SongItemRepository mSongItemCategory;
+    private MutableLiveData<ApiResponse<List<SongItem>>> mAllSongItems;
 
     public LvMusicViewModel(){
         mSongRepository = SongRepository.getInstance();
@@ -42,6 +46,9 @@ public class LvMusicViewModel extends ViewModel {
 
         mCategoryRepository = CategoryRepository.getInstance();
         mAllCategories = new MutableLiveData<>();
+
+        mSongItemCategory = SongItemRepository.getInstance();
+        mAllSongItems = new MutableLiveData<>();
     }
 
     public void fetchAllSongs(){
@@ -166,5 +173,36 @@ public class LvMusicViewModel extends ViewModel {
 
     public LiveData<ApiResponse<List<Category>>> getResponseAllCategories(){
         return mAllCategories;
+    }
+
+    public void fetchAllSongItems(){
+        mSongItemCategory.getAllSongItems()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new MaybeObserver<ApiResponse<List<SongItem>>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull ApiResponse<List<SongItem>> listApiResponse) {
+                        mAllSongItems.setValue(listApiResponse);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.d("BBB", "Error : " + e.getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    public LiveData<ApiResponse<List<SongItem>>> getResponseAllSongItems(){
+        return mAllSongItems;
     }
 }
