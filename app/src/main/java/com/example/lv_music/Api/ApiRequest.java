@@ -3,6 +3,7 @@ package com.example.lv_music.Api;
 import com.example.lv_music.Model.Advertisement;
 import com.example.lv_music.Model.ApiResponse;
 import com.example.lv_music.Model.Category;
+import com.example.lv_music.Model.Singer;
 import com.example.lv_music.Model.Song;
 import com.example.lv_music.Model.SongItem;
 
@@ -34,7 +35,18 @@ public interface ApiRequest {
 
     @GET("apiLV_Music/all_categories.php")
     Maybe<ApiResponse<List<Category>>> getAllCategories();
+    @FormUrlEncoded // parse sang dạng form để gửi lên
+    @POST("apiLV_Music/all_categories_song.php")
+    Maybe<ApiResponse<List<Category>>> getAllCategoriesOfSong(
+            @Field("song_id") Integer song_id
+    );
 
     @GET("apiLV_Music/all_song_items.php")
     Maybe<ApiResponse<List<SongItem>>> getAllSongItems();
+
+    @FormUrlEncoded // parse sang dạng form để gửi lên
+    @POST("apiLV_Music/all_singers_song.php")
+    Maybe<ApiResponse<List<Singer>>> getAllSingersOfSong(
+            @Field("song_id") Integer song_id
+    );
 }

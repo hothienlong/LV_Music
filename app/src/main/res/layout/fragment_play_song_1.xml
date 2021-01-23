@@ -22,6 +22,7 @@
                 android:text="Bài hát: "
                 android:padding="15dip" />
             <TextView
+                android:id="@+id/tvSongName"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:textColor="@color/white"
@@ -37,6 +38,7 @@
                 android:text="Nghệ sĩ: "
                 android:padding="15dip" />
             <TextView
+                android:id="@+id/tvSingerName"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:textColor="@color/white"
@@ -52,6 +54,7 @@
                 android:text="Thể loại: "
                 android:padding="15dip" />
             <TextView
+                android:id="@+id/tvCategoryName"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:textColor="@color/white"
@@ -72,6 +75,7 @@
             android:layout_height="wrap_content">
         </ImageView>
         <TextView
+            android:id="@+id/tvNumLike"
             android:textColor="@color/white"
             android:text="Số lượt thích"
             android:layout_marginLeft="5dp"

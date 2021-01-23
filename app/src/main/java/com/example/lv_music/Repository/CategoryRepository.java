@@ -31,4 +31,8 @@ public class CategoryRepository {
         return mApiRequest.getAllCategories();
     }
 
+    public Maybe<ApiResponse<List<Category>>> getAllCategoriesOfSong(Integer song_id){
+        return mApiRequest.getAllCategoriesOfSong(song_id);
+    }
+
 }

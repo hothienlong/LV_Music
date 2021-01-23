@@ -1,8 +1,6 @@
 package com.example.lv_music.Model;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
-import java.util.Arrays;
 import java.util.List;
 
 // implements Serializable để putextra đối tượng giữa các activity
