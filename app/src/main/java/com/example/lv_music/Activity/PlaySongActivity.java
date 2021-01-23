@@ -2,37 +2,22 @@ package com.example.lv_music.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 
-import com.example.lv_music.Adapter.PlaySongAdapter;
+import com.example.lv_music.Adapter.PlaySongViewPagerAdapter;
 import com.example.lv_music.Fragment.PlaySongFragment1;
 import com.example.lv_music.Fragment.PlaySongFragment2;
+import com.example.lv_music.Fragment.PlaySongFragment3;
 import com.example.lv_music.Model.Advertisement;
-import com.example.lv_music.Model.ApiResponse;
-import com.example.lv_music.Model.Category;
-import com.example.lv_music.Model.Singer;
-import com.example.lv_music.Model.Song;
 import com.example.lv_music.Model.SongItem;
 import com.example.lv_music.R;
-import com.example.lv_music.ViewModel.LvMusicViewModel;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Logger;
 
 import me.relex.circleindicator.CircleIndicator;
 
@@ -62,10 +47,11 @@ public class PlaySongActivity extends AppCompatActivity {
     }
 
     private void init() {
-        PlaySongAdapter playSongAdapter = new PlaySongAdapter(getSupportFragmentManager());
-        playSongAdapter.addFragment(new PlaySongFragment1(mSongId));
-        playSongAdapter.addFragment(new PlaySongFragment2());
-        viewPager.setAdapter(playSongAdapter);
+        PlaySongViewPagerAdapter playSongViewPagerAdapter = new PlaySongViewPagerAdapter(getSupportFragmentManager());
+        playSongViewPagerAdapter.addFragment(new PlaySongFragment1(mSongId));
+        playSongViewPagerAdapter.addFragment(new PlaySongFragment2());
+        playSongViewPagerAdapter.addFragment(new PlaySongFragment3());
+        viewPager.setAdapter(playSongViewPagerAdapter);
         // set circle indicator
         circleIndicator.setViewPager(viewPager);
     }

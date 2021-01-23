@@ -5,17 +5,18 @@
     android:layout_height="wrap_content">
 
     <androidx.viewpager.widget.ViewPager
+        android:layout_margin="15dp"
         android:id="@+id/advertisementViewPager"
         android:layout_width="match_parent"
-        android:layout_height="250dp">
+        android:layout_height="200dp">
     </androidx.viewpager.widget.ViewPager>
 
     <me.relex.circleindicator.CircleIndicator
         android:id="@+id/advertisementIndicator"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="25dp"
-        android:layout_marginRight="25dp"
         android:layout_alignTop="@id/advertisementViewPager"
+        android:layout_alignRight="@id/advertisementViewPager"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
     </me.relex.circleindicator.CircleIndicator>

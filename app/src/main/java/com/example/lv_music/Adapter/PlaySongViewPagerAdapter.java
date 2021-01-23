@@ -11,15 +11,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 // Dữ liệu: listfragment -> View
-public class PlaySongAdapter extends FragmentPagerAdapter {
+public class PlaySongViewPagerAdapter extends FragmentPagerAdapter {
 
     ArrayList<Fragment> fragments = new ArrayList<>();
 
-    public PlaySongAdapter(@NonNull FragmentManager fm) {
+    public PlaySongViewPagerAdapter(@NonNull FragmentManager fm) {
         super(fm);
     }
 
-    public PlaySongAdapter(@NonNull FragmentManager fm, int behavior) {
+    public PlaySongViewPagerAdapter(@NonNull FragmentManager fm, int behavior) {
         super(fm, behavior);
     }
 

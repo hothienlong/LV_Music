@@ -11,7 +11,7 @@
     tools:context=".Activity.PlaySongActivity">
 
     <androidx.appcompat.widget.Toolbar
-
+        app:navigationIcon="@drawable/ic_back_arrow"
         android:id="@+id/playSongToolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">

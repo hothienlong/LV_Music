@@ -20,7 +20,7 @@
                 android:textColor="@color/xam"
                 android:textSize="15sp"
                 android:text="Bài hát: "
-                android:padding="15dip" />
+                android:padding="10dip" />
             <TextView
                 android:id="@+id/tvSongName"
                 android:textSize="15sp"
@@ -28,7 +28,7 @@
                 android:textColor="@color/white"
                 android:text="Tên bài hát"
                 android:gravity="left"
-                android:padding="15dip" />
+                android:padding="10dip" />
         </TableRow>
 
         <TableRow>
@@ -36,7 +36,7 @@
                 android:textColor="@color/xam"
                 android:textSize="15sp"
                 android:text="Nghệ sĩ: "
-                android:padding="15dip" />
+                android:padding="10dip" />
             <TextView
                 android:id="@+id/tvSingerName"
                 android:textSize="15sp"
@@ -44,7 +44,7 @@
                 android:textColor="@color/white"
                 android:text="Tên nghệ sĩ"
                 android:gravity="left"
-                android:padding="15dip" />
+                android:padding="10dip" />
         </TableRow>
 
         <TableRow>
@@ -52,7 +52,7 @@
                 android:textColor="@color/xam"
                 android:textSize="15sp"
                 android:text="Thể loại: "
-                android:padding="15dip" />
+                android:padding="10dip" />
             <TextView
                 android:id="@+id/tvCategoryName"
                 android:textSize="15sp"
@@ -60,7 +60,7 @@
                 android:textColor="@color/white"
                 android:text="Tên thể loại"
                 android:gravity="left"
-                android:padding="15dip" />
+                android:padding="10dip" />
         </TableRow>
     </TableLayout>
 
@@ -100,7 +100,7 @@
 
         <ImageView
             android:layout_marginLeft="5dp"
-            android:src="@drawable/ic_next"
+            android:src="@drawable/ic_next_white"
             android:layout_width="15dp"
             android:layout_height="15dp">
         </ImageView>

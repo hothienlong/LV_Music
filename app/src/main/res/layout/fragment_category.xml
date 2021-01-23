@@ -25,7 +25,7 @@
         <ImageView
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="5dp"
-            android:src="@drawable/ic_next"
+            android:src="@drawable/ic_next_black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
         </ImageView>
