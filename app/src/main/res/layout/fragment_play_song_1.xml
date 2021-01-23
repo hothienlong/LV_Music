@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<!-- set chữ màu trắng nên hơi khó nhìn! -->
 <!-- coordinatorlayout để chặn nested scroll view (ko cho recyclerview scroll một mình) -->
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -12,7 +13,7 @@
     <!-- Những view collapse sẽ để trong appbar -->
     <!-- #00000000 là màu trong suốt -->
     <com.google.android.material.appbar.AppBarLayout
-        android:background="#00000000"
+        android:background="@color/trongsuot"
         android:fitsSystemWindows="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

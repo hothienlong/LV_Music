@@ -8,4 +8,6 @@
     <color name="alpha">#ABABAB</color>
     <color name="white">#ffffff</color>
     <color name="xam">#4C4950</color>
+    <color name="colorRipple">#A9A9F5</color>
+    <color name="trongsuot">#00000000</color>
 </resources>
