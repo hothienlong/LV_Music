@@ -57,8 +57,12 @@ public class ListSongFragment extends Fragment {
 
                 ListSongAdapter listSongAdapter = new ListSongAdapter(listApiResponse.getData());
 
-                songItemRecyclerview.setHasFixedSize(true);//tăng performance
+                //tăng performance
+                songItemRecyclerview.setHasFixedSize(true);
+
                 songItemRecyclerview.setAdapter(listSongAdapter);
+
+                //animation
                 songItemRecyclerview.scheduleLayoutAnimation();
 
             }

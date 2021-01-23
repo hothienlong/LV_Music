@@ -3,4 +3,9 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+    <color name="PurpleStartOpacity">#332D0343</color>
+    <color name="PurpleEndOpacity">#3399618C</color>
+    <color name="alpha">#ABABAB</color>
+    <color name="white">#ffffff</color>
+    <color name="xam">#4C4950</color>
 </resources>

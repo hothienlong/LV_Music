@@ -25,6 +25,7 @@ import java.util.List;
 
 import me.relex.circleindicator.CircleIndicator;
 
+// call api đọc dữ liệu -> dùng adapter đổ lên view
 public class AdvertisementFragment extends Fragment {
     View view;
     LvMusicViewModel mLvMusicViewModel;
