@@ -1,118 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- coordinatorlayout để chặn nested scroll view (ko cho recyclerview scroll một mình) -->
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="5dp"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TableLayout
-        android:layout_margin="8dp"
-        android:background="@drawable/bg_table_play_song"
-        android:padding="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:stretchColumns="1">
-        <TableRow>
-            <TextView
-                android:textColor="@color/xam"
-                android:textSize="15sp"
-                android:text="Bài hát: "
-                android:padding="10dip" />
-            <TextView
-                android:id="@+id/tvSongName"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:text="Tên bài hát"
-                android:gravity="left"
-                android:padding="10dip" />
-        </TableRow>
-
-        <TableRow>
-            <TextView
-                android:textColor="@color/xam"
-                android:textSize="15sp"
-                android:text="Nghệ sĩ: "
-                android:padding="10dip" />
-            <TextView
-                android:id="@+id/tvSingerName"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:text="Tên nghệ sĩ"
-                android:gravity="left"
-                android:padding="10dip" />
-        </TableRow>
-
-        <TableRow>
-            <TextView
-                android:textColor="@color/xam"
-                android:textSize="15sp"
-                android:text="Thể loại: "
-                android:padding="10dip" />
-            <TextView
-                android:id="@+id/tvCategoryName"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:text="Tên thể loại"
-                android:gravity="left"
-                android:padding="10dip" />
-        </TableRow>
-    </TableLayout>
-
-    <LinearLayout
-        android:gravity="center_vertical"
-        android:padding="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="50dp">
-        <ImageView
-            android:src="@drawable/ic_disheart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        </ImageView>
-        <TextView
-            android:id="@+id/tvNumLike"
-            android:textColor="@color/white"
-            android:text="Số lượt thích"
-            android:layout_marginLeft="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        </TextView>
-    </LinearLayout>
-
-    <LinearLayout
-        android:gravity="center_vertical"
-        android:padding="5dp"
+    <!-- Những view collapse sẽ để trong appbar -->
+    <!-- #00000000 là màu trong suốt -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:background="#00000000"
+        android:fitsSystemWindows="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <TextView
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:text="Nghe bài khác"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        </TextView>
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            android:fitsSystemWindows="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <ImageView
-            android:layout_marginLeft="5dp"
-            android:src="@drawable/ic_next_white"
-            android:layout_width="15dp"
-            android:layout_height="15dp">
-        </ImageView>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TableLayout
+                    android:layout_margin="8dp"
+                    android:background="@drawable/bg_table_play_song"
+                    android:padding="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:stretchColumns="1">
+                    <TableRow>
+                        <TextView
+                            android:textColor="@color/xam"
+                            android:textSize="15sp"
+                            android:text="Bài hát: "
+                            android:padding="10dip" />
+                        <TextView
+                            android:id="@+id/tvSongName"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/white"
+                            android:text="Tên bài hát"
+                            android:gravity="left"
+                            android:padding="10dip" />
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView
+                            android:textColor="@color/xam"
+                            android:textSize="15sp"
+                            android:text="Nghệ sĩ: "
+                            android:padding="10dip" />
+                        <TextView
+                            android:id="@+id/tvSingerName"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/white"
+                            android:text="Tên nghệ sĩ"
+                            android:gravity="left"
+                            android:padding="10dip" />
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView
+                            android:textColor="@color/xam"
+                            android:textSize="15sp"
+                            android:text="Thể loại: "
+                            android:padding="10dip" />
+                        <TextView
+                            android:id="@+id/tvCategoryName"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/white"
+                            android:text="Tên thể loại"
+                            android:gravity="left"
+                            android:padding="10dip" />
+                    </TableRow>
+                </TableLayout>
+
+                <LinearLayout
+                    android:gravity="center_vertical"
+                    android:padding="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+                    <ImageView
+                        android:src="@drawable/ic_disheart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                    </ImageView>
+                    <TextView
+                        android:id="@+id/tvNumLike"
+                        android:textColor="@color/white"
+                        android:text="Số lượt thích"
+                        android:layout_marginLeft="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                    </TextView>
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- View ko collapse để ngoài appbar -->
+    <!-- layout_behavior để set nằm dưới appbar -->
+    <LinearLayout
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:padding="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:text="Nghe bài khác"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </TextView>
+
+            <ImageView
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/ic_next_white"
+                android:layout_width="15dp"
+                android:layout_height="15dp">
+            </ImageView>
+        </LinearLayout>
+
+        <fragment
+            android:tag="playsong1"
+            android:id="@+id/fragmentListSong"
+            android:name="com.example.lv_music.Fragment.ListSongFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:layout="@layout/fragment_list_song">
+        </fragment>
     </LinearLayout>
 
-    <fragment
-        android:tag="playsong1"
-        android:id="@+id/fragmentListSong"
-        android:name="com.example.lv_music.Fragment.ListSongFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:layout="@layout/fragment_list_song">
-    </fragment>
 
-</LinearLayout>
+
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
