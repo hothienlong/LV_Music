@@ -37,6 +37,7 @@
     </LinearLayout>
 
     <fragment
+        android:tag="listsongpage"
         android:name="com.example.lv_music.Fragment.ListSongFragment"
         android:id="@+id/fragmentListSong"
         android:layout_below="@id/linearlayout"

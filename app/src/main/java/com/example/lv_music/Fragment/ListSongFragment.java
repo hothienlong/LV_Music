@@ -21,6 +21,7 @@ import com.example.lv_music.ViewModel.LvMusicViewModel;
 
 import java.util.List;
 
+
 public class ListSongFragment extends Fragment {
 
     View view;
@@ -58,6 +59,8 @@ public class ListSongFragment extends Fragment {
 
                 songItemRecyclerview.setHasFixedSize(true);//tăng performance
                 songItemRecyclerview.setAdapter(listSongAdapter);
+                songItemRecyclerview.scheduleLayoutAnimation();
+
             }
         });
 
