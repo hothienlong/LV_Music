@@ -32,6 +32,7 @@ import com.example.lv_music.ViewModel.LvMusicViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import me.relex.circleindicator.CircleIndicator;
 
@@ -98,12 +99,14 @@ public class PlaySongActivity extends AppCompatActivity {
         if(intent != null){
             if(intent.hasExtra("song")){
                 SongItem songItem = (SongItem) intent.getSerializableExtra("song");
-//                Toast.makeText(this, songItem.getName(), Toast.LENGTH_SHORT).show();
+//              Toast.makeText(this, songItem.getName(), Toast.LENGTH_SHORT).show();
                 mSongId = songItem.getId();
             }
             else if(intent.hasExtra("advertisement")){
                 Advertisement advertisement = (Advertisement) intent.getSerializableExtra("advertisement");
-                Toast.makeText(this, advertisement.toString(), Toast.LENGTH_SHORT).show();
+//                Log.d("BBB", advertisement.getSongId());
+//                Toast.makeText(this, advertisement.toString(), Toast.LENGTH_SHORT).show();
+                mSongId = advertisement.getSongId();
             }
         }
     }

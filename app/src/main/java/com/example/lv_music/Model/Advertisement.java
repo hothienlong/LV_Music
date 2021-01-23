@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Advertisement implements Serializable {
 
     private String id;
-    private String songId;
+    private String song_id;
     private String image;
     private String content;
 
@@ -18,11 +18,11 @@ public class Advertisement implements Serializable {
     }
 
     public String getSongId() {
-        return songId;
+        return song_id;
     }
 
     public void setSongId(String songId) {
-        this.songId = songId;
+        this.song_id = songId;
     }
 
     public String getImage() {
@@ -45,7 +45,7 @@ public class Advertisement implements Serializable {
     public String toString() {
         return "Advertisement{" +
                 "id='" + id + '\'' +
-                ", songId='" + songId + '\'' +
+                ", songId='" + song_id + '\'' +
                 ", image='" + image + '\'' +
                 ", content='" + content + '\'' +
                 '}';
