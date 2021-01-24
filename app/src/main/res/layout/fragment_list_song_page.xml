@@ -27,8 +27,8 @@
         <Button
             android:id="@+id/btnRandom"
             android:textStyle="bold"
-            android:textColor="@color/colorAccent"
-            android:background="@drawable/bg_ripple_effect"
+            android:textColor="@color/white"
+            android:background="@drawable/bg_btn_random"
             android:layout_marginTop="10dp"
             android:text="Phát ngẫu nhiên"
             android:layout_width="wrap_content"
