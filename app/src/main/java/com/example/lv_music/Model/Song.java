@@ -6,7 +6,9 @@ public class Song {
     private String id;
     private String name;
     private String image;
-    private String link;
+    private String song_link;
+    private String mv_link;
+    private String lyric;
 
     public String getId() {
         return id;
@@ -32,12 +34,28 @@ public class Song {
         this.image = image;
     }
 
-    public String getLink() {
-        return link;
+    public String getSong_link() {
+        return song_link;
     }
 
-    public void setLink(String link) {
-        this.link = link;
+    public void setSong_link(String song_link) {
+        this.song_link = song_link;
+    }
+
+    public String getMv_link() {
+        return mv_link;
+    }
+
+    public void setMv_link(String mv_link) {
+        this.mv_link = mv_link;
+    }
+
+    public String getLyric() {
+        return lyric;
+    }
+
+    public void setLyric(String lyric) {
+        this.lyric = lyric;
     }
 
     @Override
@@ -46,7 +64,9 @@ public class Song {
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", image='" + image + '\'' +
-                ", link='" + link + '\'' +
+                ", song_link='" + song_link + '\'' +
+                ", mv_link='" + mv_link + '\'' +
+                ", lyric='" + lyric + '\'' +
                 '}';
     }
 }

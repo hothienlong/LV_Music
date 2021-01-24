@@ -58,7 +58,7 @@ public class ListSongAdapter extends RecyclerView.Adapter<ListSongAdapter.SongVi
             Picasso.get().load(songItems.get(position).getImage()).into(holder.imgSong);
         }
         catch (IllegalArgumentException e){
-            holder.imgSong.setImageResource(R.drawable.ic_unknown2);
+//            holder.imgSong.setImageResource(R.drawable.ic_unknown2);
         }
 
         // bắt sự kiện bấm vào 1 bài hát
