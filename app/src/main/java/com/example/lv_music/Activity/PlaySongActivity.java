@@ -50,7 +50,7 @@ public class PlaySongActivity extends AppCompatActivity {
         PlaySongViewPagerAdapter playSongViewPagerAdapter = new PlaySongViewPagerAdapter(getSupportFragmentManager());
         playSongViewPagerAdapter.addFragment(new PlaySongFragment1(mSongId));
         playSongViewPagerAdapter.addFragment(new PlaySongFragment2());
-        playSongViewPagerAdapter.addFragment(new PlaySongFragment3());
+        playSongViewPagerAdapter.addFragment(new PlaySongFragment3(mSongId));
         viewPager.setAdapter(playSongViewPagerAdapter);
         // set circle indicator
         circleIndicator.setViewPager(viewPager);
