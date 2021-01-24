@@ -10,8 +10,7 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.lv_music.Activity.PlaySongActivity;
-import com.example.lv_music.Activity.SongCategoryActivity;
+import com.example.lv_music.Activity.SongsCategoryActivity;
 import com.example.lv_music.Model.Category;
 import com.example.lv_music.R;
 import com.squareup.picasso.Picasso;
@@ -49,7 +48,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, SongCategoryActivity.class);
+                Intent intent = new Intent(context, SongsCategoryActivity.class);
                 intent.putExtra("category", categories.get(position));
                 context.startActivity(intent);
             }

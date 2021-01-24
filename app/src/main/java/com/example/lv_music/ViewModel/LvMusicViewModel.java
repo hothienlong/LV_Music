@@ -39,6 +39,7 @@ public class LvMusicViewModel extends ViewModel {
     private MutableLiveData<ApiResponse<List<Category>>> mAllCategoriesOfSong;
     private SongItemRepository mSongItemRepository;
     private MutableLiveData<ApiResponse<List<SongItem>>> mAllSongItems;
+    private MutableLiveData<ApiResponse<List<SongItem>>> mAllSongItemsCategory;
     private SingerRepository mSingerRepository;
     private MutableLiveData<ApiResponse<List<Singer>>> mAllSingersOfSong;
 
@@ -46,6 +47,7 @@ public class LvMusicViewModel extends ViewModel {
         mSongRepository = SongRepository.getInstance();
         mAllSongs = new MutableLiveData<>();
         mSong = new MutableLiveData<>();
+        mAllSongsCategory = new MutableLiveData<>();
 
         mAdvertisementRepository = AdvertisementRepository.getInstance();
         mAllAdvertisements = new MutableLiveData<>();
@@ -56,6 +58,7 @@ public class LvMusicViewModel extends ViewModel {
 
         mSongItemRepository = SongItemRepository.getInstance();
         mAllSongItems = new MutableLiveData<>();
+        mAllSongItemsCategory = new MutableLiveData<>();
 
         mSingerRepository = SingerRepository.getInstance();
         mAllSingersOfSong = new MutableLiveData<>();
@@ -247,8 +250,39 @@ public class LvMusicViewModel extends ViewModel {
         return mAllSongItems;
     }
 
-    public void fetchAllSongsCategory(){
-        mSongRepository.getAllSongsCategory()
+    public void fetchAllSongItemsCategory(Integer cate_id){
+        mSongItemRepository.getAllSongItemsCategory(cate_id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new MaybeObserver<ApiResponse<List<SongItem>>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull ApiResponse<List<SongItem>> listApiResponse) {
+                        mAllSongItemsCategory.setValue(listApiResponse);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.d("BBB", "Error : " + e.getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    public LiveData<ApiResponse<List<SongItem>>> getResponseAllSongItemsCategory(){
+        return mAllSongItemsCategory;
+    }
+
+    public void fetchAllSongsCategory(Integer cate_id){
+        mSongRepository.getAllSongsCategory(cate_id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new MaybeObserver<ApiResponse<List<Song>>>() {
