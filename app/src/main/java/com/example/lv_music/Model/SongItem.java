@@ -9,7 +9,6 @@ public class SongItem implements Serializable {
     private String id;
     private String name;
     private String image;
-    private String song_link;
     private List<String> lst_singer_names = null; // dùng jsonschemapojo => tên sai lstSingerNames... (nếu xóa đi serialize)
 
     public String getId() {
@@ -36,14 +35,6 @@ public class SongItem implements Serializable {
         this.image = image;
     }
 
-    public String getSong_link() {
-        return song_link;
-    }
-
-    public void setSong_link(String song_link) {
-        this.song_link = song_link;
-    }
-
     public List<String> getLstSingerNames() {
         return lst_singer_names;
     }
@@ -58,7 +49,6 @@ public class SongItem implements Serializable {
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", image='" + image + '\'' +
-                ", song_link='" + song_link + '\'' +
                 ", lst_singer_names=" + lst_singer_names +
                 '}';
     }
