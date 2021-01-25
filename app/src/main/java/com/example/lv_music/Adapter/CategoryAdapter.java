@@ -42,6 +42,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         Picasso.get()
                 .load(categories.get(position).getImage())
                 .into(holder.imgCategory);
+
 //        holder.tvCategoryName.setText(categories.get(position).getName());
 
         // bắt sự kiện click category

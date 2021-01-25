@@ -19,32 +19,31 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collapseBarSongsCategory"
-            android:background="@drawable/bg_table_play_song"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            android:fitsSystemWindows="true"
             android:layout_width="match_parent"
-            android:layout_height="300dp">
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_table_play_song"
+            android:fitsSystemWindows="true"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <ImageView
                 android:id="@+id/imgCategory"
-                android:elevation="8dp"
-                android:layout_marginBottom="10dp"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_unknown2"
                 android:layout_width="200dp"
-                android:layout_height="200dp">
-            </ImageView>
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:elevation="8dp"
+                android:src="@drawable/ic_unknown2"></ImageView>
 
             <androidx.appcompat.widget.Toolbar
+                android:id="@+id/songsCategoryToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
                 android:theme="@style/ThemeOverlay.AppCompat.Light"
                 app:layout_collapseMode="pin"
-                app:navigationIcon="@drawable/ic_back_arrow"
-                android:id="@+id/playSongToolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize">
-            </androidx.appcompat.widget.Toolbar>
+                app:navigationIcon="@drawable/ic_back_arrow"></androidx.appcompat.widget.Toolbar>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
@@ -54,6 +53,7 @@
     <!-- Floating button để nổi lên trên => nằm giữa ranh giới toolbar và phần dưới -->
     <!-- Floating button ko cho set full image nên để nền màu đen.. -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:elevation="8dp"
         android:backgroundTint="#000000"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
         android:id="@+id/floatBtnRandom"
@@ -71,16 +71,12 @@
         android:layoutAnimation="@anim/layout_animation"
         tools:listitem="@layout/layout_list_song_item"
         android:layout_marginBottom="10dp"
-        android:layout_marginTop="45dp"
+        android:paddingTop="45dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:orientation="vertical"
         android:id="@+id/songItemRecyclerview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
     </androidx.recyclerview.widget.RecyclerView>
-
-
-
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

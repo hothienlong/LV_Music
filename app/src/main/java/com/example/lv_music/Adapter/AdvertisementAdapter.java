@@ -51,6 +51,7 @@ public class AdvertisementAdapter extends PagerAdapter {
         TextView tvContent = view.findViewById(R.id.tvContentAdvertisement);
 
         Picasso.get().load(advertisements.get(position).getImage()).into(imgAdvertisement);
+
         tvContent.setText(advertisements.get(position).getContent());
 
         container.addView(view); // add view vào view group của context truyền vào (relative layout của advertisement fragment)

@@ -6,10 +6,17 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.lv_music.Adapter.ListSongAdapter;
 import com.example.lv_music.Model.ApiResponse;
@@ -21,7 +28,11 @@ import com.example.lv_music.ViewModel.LvMusicViewModel;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -34,6 +45,7 @@ public class SongsCategoryActivity extends AppCompatActivity {
     CollapsingToolbarLayout collapsingToolbarLayout;
     ImageView imgCategory;
     FloatingActionButton floatBtnRandom;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +54,55 @@ public class SongsCategoryActivity extends AppCompatActivity {
 
         addControls();
         catchIntent();
+        init();
         getData();
+
+    }
+
+    private void init() {
+        collapsingToolbarLayout.setTitle(mCategory.getName());
+        Picasso.get().load(mCategory.getImage()).into(new Target() {
+            @Override
+            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                collapsingToolbarLayout.setBackground(new BitmapDrawable(getResources(), bitmap));
+                imgCategory.setImageBitmap(bitmap);
+            }
+
+            @Override
+            public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+                Log.d("BBB", "Load bit map false");
+            }
+
+            @Override
+            public void onPrepareLoad(Drawable placeHolderDrawable) {
+                Log.d("BBB", "Prepare load bit map false");
+            }
+        });
+
+//        URL url = null;
+//        try {
+//            url = new URL(mCategory.getImage());
+//            // thay thư viện picasso 2.8 -> 2.5.2 để ko bị lỗi dòng tạo bitmap
+//            Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+//            BitmapDrawable background = new BitmapDrawable(getResources(), bmp);
+//            imgCategory.setImageBitmap(bmp);
+//            collapsingToolbarLayout.setBackground(background);
+//        } catch (MalformedURLException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
+        collapsingToolbarLayout.setExpandedTitleColor(Color.TRANSPARENT);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        toolbar.setTitleTextColor(Color.WHITE);
 
     }
 
@@ -51,11 +111,10 @@ public class SongsCategoryActivity extends AppCompatActivity {
         collapsingToolbarLayout = findViewById(R.id.collapseBarSongsCategory);
         imgCategory = findViewById(R.id.imgCategory);
         floatBtnRandom = findViewById(R.id.floatBtnRandom);
+        toolbar = findViewById(R.id.songsCategoryToolbar);
     }
 
     private void getData() {
-
-
         mLvMusicViewModel = ViewModelProviders.of(this).get(LvMusicViewModel.class);
 
         mLvMusicViewModel.getResponseAllSongItemsCategory().observe(this, new Observer<ApiResponse<List<SongItem>>>() {
