@@ -2,18 +2,26 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:scrollbars="none"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity.SingerActivity">
 
     <LinearLayout
-        android:weightSum="10"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            app:title="Nghệ danh"
+            android:id="@+id/singerToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+        </androidx.appcompat.widget.Toolbar>
+
         <TableLayout
-            android:layout_margin="8dp"
-            android:padding="10dp"
+            android:layout_margin="5dp"
+            android:padding="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:stretchColumns="1">
@@ -24,7 +32,7 @@
                     android:text="Tên thật: "
                     android:padding="10dip" />
                 <TextView
-                    android:id="@+id/tvSongName"
+                    android:id="@+id/tvSingerName"
                     android:textSize="15sp"
                     android:textColor="@color/black"
                     android:text="Tên nghệ sĩ"
@@ -39,7 +47,7 @@
                     android:text="Ngày sinh: "
                     android:padding="10dip" />
                 <TextView
-                    android:id="@+id/tvSingerName"
+                    android:id="@+id/tvBirthdate"
                     android:textSize="15sp"
                     android:textColor="@color/black"
                     android:text="Ngày sinh"
@@ -54,13 +62,22 @@
                     android:text="Quê quán: "
                     android:padding="10dip" />
                 <TextView
-                    android:id="@+id/tvCategoryName"
+                    android:id="@+id/tvCountry"
                     android:textSize="15sp"
                     android:textColor="@color/black"
                     android:text="Quê quán"
                     android:gravity="left"
                     android:padding="10dip" />
             </TableRow>
+            <TextView
+                android:id="@+id/tvInfomation"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:text="Tiểu sử"
+                android:padding="10dip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </TextView>
         </TableLayout>
     </LinearLayout>
 

@@ -3,7 +3,9 @@ package com.example.lv_music.Model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Singer {
+import java.io.Serializable;
+
+public class Singer implements Serializable {
 
 private String singer_id;
 private String stage_name;

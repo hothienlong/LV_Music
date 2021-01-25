@@ -1,6 +1,7 @@
 package com.example.lv_music.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.method.NumberKeyListener;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.lv_music.Activity.SingerActivity;
 import com.example.lv_music.Model.Singer;
 import com.example.lv_music.R;
 import com.squareup.picasso.Picasso;
@@ -20,6 +22,7 @@ import java.util.List;
 
 public class ListSingerAdapter extends RecyclerView.Adapter<ListSingerAdapter.SingerViewHolder> {
 
+    Context context;
     List<Singer> singers;
 
     public ListSingerAdapter(List<Singer> singers) {
@@ -29,7 +32,7 @@ public class ListSingerAdapter extends RecyclerView.Adapter<ListSingerAdapter.Si
     @NonNull
     @Override
     public SingerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Context context = parent.getContext();
+        context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.layout_list_singer_item, parent, false);
         return new SingerViewHolder(view);
@@ -56,6 +59,15 @@ public class ListSingerAdapter extends RecyclerView.Adapter<ListSingerAdapter.Si
             Log.d("BBB", e.getMessage());
         }
 
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, SingerActivity.class);
+                intent.putExtra("singer", singer);
+                context.startActivity(intent);
+            }
+        });
 
     }
 
