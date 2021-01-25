@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.SingerActivity">
+
+    <LinearLayout
+        android:weightSum="10"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TableLayout
+            android:layout_margin="8dp"
+            android:padding="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:stretchColumns="1">
+            <TableRow>
+                <TextView
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:text="Tên thật: "
+                    android:padding="10dip" />
+                <TextView
+                    android:id="@+id/tvSongName"
+                    android:textSize="15sp"
+                    android:textColor="@color/black"
+                    android:text="Tên nghệ sĩ"
+                    android:gravity="left"
+                    android:padding="10dip" />
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:text="Ngày sinh: "
+                    android:padding="10dip" />
+                <TextView
+                    android:id="@+id/tvSingerName"
+                    android:textSize="15sp"
+                    android:textColor="@color/black"
+                    android:text="Ngày sinh"
+                    android:gravity="left"
+                    android:padding="10dip" />
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:text="Quê quán: "
+                    android:padding="10dip" />
+                <TextView
+                    android:id="@+id/tvCategoryName"
+                    android:textSize="15sp"
+                    android:textColor="@color/black"
+                    android:text="Quê quán"
+                    android:gravity="left"
+                    android:padding="10dip" />
+            </TableRow>
+        </TableLayout>
+    </LinearLayout>
+
+</ScrollView>

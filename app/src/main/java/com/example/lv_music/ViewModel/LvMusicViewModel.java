@@ -42,6 +42,7 @@ public class LvMusicViewModel extends ViewModel {
     private MutableLiveData<ApiResponse<List<SongItem>>> mAllSongItemsCategory;
     private SingerRepository mSingerRepository;
     private MutableLiveData<ApiResponse<List<Singer>>> mAllSingersOfSong;
+    private MutableLiveData<ApiResponse<List<Singer>>> mAllSingers;
 
     public LvMusicViewModel(){
         mSongRepository = SongRepository.getInstance();
@@ -62,6 +63,7 @@ public class LvMusicViewModel extends ViewModel {
 
         mSingerRepository = SingerRepository.getInstance();
         mAllSingersOfSong = new MutableLiveData<>();
+        mAllSingers = new MutableLiveData<>();
     }
 
     public void fetchAllSongs(){
@@ -311,6 +313,39 @@ public class LvMusicViewModel extends ViewModel {
     public LiveData<ApiResponse<List<Song>>> getResponseAllSongsCategory(){
         return mAllSongsCategory;
     }
+
+
+    public void fetchAllSingers(){
+        mSingerRepository.getAllSingers()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new MaybeObserver<ApiResponse<List<Singer>>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull ApiResponse<List<Singer>> listApiResponse) {
+                        mAllSingers.setValue(listApiResponse);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.d("BBB", "Error : " + e.getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    public LiveData<ApiResponse<List<Singer>>> getResponseAllSingers(){
+        return mAllSingers;
+    }
+
 
     public void fetchAllSingersOfSong(Integer song_id){
         mSingerRepository.getAllSingersOfSong(song_id)

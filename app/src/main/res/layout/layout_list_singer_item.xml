@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="10dp"
+    android:weightSum="5"
+    android:gravity="center"
+    android:background="@drawable/bg_ripple_effect"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:padding="5dp"
+        android:id="@+id/cardviewSinger"
+        app:cardElevation="5dp"
+        app:cardCornerRadius="180dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:background="@drawable/ic_unknown2"
+            android:id="@+id/imgSinger"
+            android:scaleType="fitXY"
+            android:layout_width="70dp"
+            android:layout_height="70dp">
+        </ImageView>
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:layout_weight="5"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tvSingerName"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:layout_marginLeft="10dp"
+            android:textSize="20sp"
+            android:textColor="#000000"
+            android:text="Tên ca sĩ"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </TextView>
+
+    </LinearLayout>
+
+
+</LinearLayout>

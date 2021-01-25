@@ -18,6 +18,7 @@ import retrofit2.http.POST;
 public interface ApiRequest {
 //    @GET("Server/all_songs.php")
 //    Maybe<ApiResponse<List<Song>>> getAllSongs();
+    // song
     @GET("apiLV_Music/all_songs.php")
     Maybe<ApiResponse<List<Song>>> getAllSongs();
     
@@ -33,9 +34,11 @@ public interface ApiRequest {
             @Field("id") Integer id
     );
 
+    // advertisement
     @GET("apiLV_Music/all_advertisements.php")
     Maybe<ApiResponse<List<Advertisement>>> getAllAdvertisements();
 
+    // category
     @GET("apiLV_Music/all_categories.php")
     Maybe<ApiResponse<List<Category>>> getAllCategories();
     @FormUrlEncoded // parse sang dạng form để gửi lên
@@ -44,6 +47,7 @@ public interface ApiRequest {
             @Field("song_id") Integer song_id
     );
 
+    // song item
     @GET("apiLV_Music/all_song_items.php")
     Maybe<ApiResponse<List<SongItem>>> getAllSongItems();
     @FormUrlEncoded // parse sang dạng form để gửi lên
@@ -51,6 +55,10 @@ public interface ApiRequest {
     Maybe<ApiResponse<List<SongItem>>> getAllSongItemsCategory(
             @Field("cate_id") Integer cate_id
     );
+
+    // singer
+    @GET("apiLV_Music/all_singers.php")
+    Maybe<ApiResponse<List<Singer>>> getAllSingers();
 
     @FormUrlEncoded // parse sang dạng form để gửi lên
     @POST("apiLV_Music/all_singers_song.php")

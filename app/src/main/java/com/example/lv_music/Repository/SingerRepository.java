@@ -30,4 +30,8 @@ public class SingerRepository {
     public Maybe<ApiResponse<List<Singer>>> getAllSingersOfSong(Integer song_id){
         return mApiRequest.getAllSingersOfSong(song_id);
     }
+
+    public Maybe<ApiResponse<List<Singer>>> getAllSingers(){
+        return mApiRequest.getAllSingers();
+    }
 }
