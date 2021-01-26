@@ -11,8 +11,7 @@
         app:title="Nghệ sĩ"
         android:id="@+id/listSingersToolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
+        android:layout_height="?attr/actionBarSize">
     </androidx.appcompat.widget.Toolbar>
 
     <!-- Scroll view để thanh tìm kiếm có thể scroll theo recyclerview -->
@@ -26,7 +25,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <TextView
-                android:id="@+id/timkim"
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 android:layout_margin="10dp"
