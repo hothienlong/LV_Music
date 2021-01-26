@@ -11,6 +11,8 @@
     tools:context=".Activity.PlaySongActivity">
 
     <androidx.appcompat.widget.Toolbar
+        app:titleTextColor="@color/white"
+        app:title="LV Music"
         app:navigationIcon="@drawable/ic_back_arrow"
         android:id="@+id/playSongToolbar"
         android:layout_width="match_parent"

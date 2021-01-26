@@ -1,16 +1,20 @@
 package com.example.lv_music.Activity;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.Service;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.AudioAttributes;
 import android.media.MediaPlayer;
+import android.os.Binder;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -58,8 +62,8 @@ public class PlaySongActivity extends AppCompatActivity {
 
     private void playMusic(String url) {
 
+        MediaPlayer mediaPlayer = new MediaPlayer();
         try {
-            MediaPlayer mediaPlayer = new MediaPlayer();
             mediaPlayer.setAudioAttributes(
                     new AudioAttributes.Builder()
                             .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
@@ -86,6 +90,18 @@ public class PlaySongActivity extends AppCompatActivity {
         circleIndicator.setViewPager(viewPager);
     }
 
+    public void initLayoutActivity(Song song){
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        toolbar.setTitle(song.getName());
+    }
+
     private void addControls() {
         viewPager = findViewById(R.id.playSongViewPager);
         circleIndicator = findViewById(R.id.playSongIndicator);
@@ -97,16 +113,6 @@ public class PlaySongActivity extends AppCompatActivity {
         imgPlaySong = findViewById(R.id.imgPlaySong);
         imgForward = findViewById(R.id.imgForward);
         imgRepeat = findViewById(R.id.imgRepeat);
-
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-        toolbar.setTitleTextColor(Color.WHITE);
     }
 
     private void catchIntent() {
@@ -115,22 +121,12 @@ public class PlaySongActivity extends AppCompatActivity {
 
         if(intent != null){
             lvMusicViewModel = ViewModelProviders.of(this).get(LvMusicViewModel.class);
-            String songId;
+            String songId = null;
 
             if(intent.hasExtra("song")){
                 SongItem songItem = (SongItem) intent.getSerializableExtra("song");
 //              Toast.makeText(this, songItem.getName(), Toast.LENGTH_SHORT).show();
                 songId = songItem.getId();
-                initLayoutFragment(songId);
-
-                lvMusicViewModel.getResponseSong().observe(this, new Observer<ApiResponse<Song>>() {
-                    @Override
-                    public void onChanged(ApiResponse<Song> songApiResponse) {
-                        playMusic(songApiResponse.getData().getSong_link());
-                    }
-                });
-
-                lvMusicViewModel.fetchSong(Integer.parseInt(songId));
             }
             else if(intent.hasExtra("advertisement")){
                 Advertisement advertisement = (Advertisement) intent.getSerializableExtra("advertisement");
@@ -138,6 +134,19 @@ public class PlaySongActivity extends AppCompatActivity {
 //                Toast.makeText(this, advertisement.toString(), Toast.LENGTH_SHORT).show();
                 songId = advertisement.getSongId();
             }
+
+            // init layout before play music
+            initLayoutFragment(songId);
+
+            lvMusicViewModel.getResponseSong().observe(this, new Observer<ApiResponse<Song>>() {
+                @Override
+                public void onChanged(ApiResponse<Song> songApiResponse) {
+                    initLayoutActivity(songApiResponse.getData());
+                    playMusic(songApiResponse.getData().getSong_link());
+                }
+            });
+
+            lvMusicViewModel.fetchSong(Integer.parseInt(songId));
         }
     }
 }
