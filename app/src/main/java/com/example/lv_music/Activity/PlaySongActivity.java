@@ -43,6 +43,7 @@ public class PlaySongActivity extends AppCompatActivity {
     CircleIndicator circleIndicator;
 
     LvMusicViewModel lvMusicViewModel;
+    public static MediaPlayer mediaPlayer; //tất cả activity chỉ có 1 mediaplayer duy nhất
 
 
     @Override
@@ -51,34 +52,69 @@ public class PlaySongActivity extends AppCompatActivity {
         setContentView(R.layout.activity_play_song);
         addControls();
         catchIntent();
+        addEvents();
+    }
+
+    private void addEvents() {
+        imgPlaySong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(PlaySongActivity.mediaPlayer != null){
+                    if(!PlaySongActivity.mediaPlayer.isPlaying()){
+                        playMusic();
+                    }
+                    else {
+                        pauseMusic();
+                    }
+                }
+            }
+        });
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-
-
     }
 
-    private void playMusic(String url) {
+    private void initMediaPlayer(String url) {
 
-        MediaPlayer mediaPlayer = new MediaPlayer();
-        try {
-            mediaPlayer.setAudioAttributes(
-                    new AudioAttributes.Builder()
-                            .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-                            .setUsage(AudioAttributes.USAGE_MEDIA)
-                            .build()
-            );
-            mediaPlayer.setDataSource(url);
-            mediaPlayer.prepare(); // might take long! (for buffering, etc)
-            mediaPlayer.start();
-            Toast.makeText(this, "play", Toast.LENGTH_SHORT).show();
-        } catch (IOException e) {
-            e.printStackTrace();
+        // mỗi lần chỉ đúng 1 bài nhạc đc khởi tạo
+        if(PlaySongActivity.mediaPlayer == null){
+            PlaySongActivity.mediaPlayer = new MediaPlayer();
+            try {
+                PlaySongActivity.mediaPlayer.setAudioAttributes(
+                        new AudioAttributes.Builder()
+                                .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                                .setUsage(AudioAttributes.USAGE_MEDIA)
+                                .build()
+                );
+                PlaySongActivity.mediaPlayer.setDataSource(url);
+                PlaySongActivity.mediaPlayer.prepare(); // might take long! (for buffering, etc)
+//                Toast.makeText(this, "play", Toast.LENGTH_SHORT).show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-
     }
+
+    private void clearMediaPlayer() {
+        if(mediaPlayer != null){
+            mediaPlayer.stop();
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
+    }
+
+    private void playMusic(){
+        PlaySongActivity.mediaPlayer.start();
+        imgPlaySong.setImageResource(R.drawable.ic_pause_button);
+    }
+
+    private void pauseMusic(){
+        PlaySongActivity.mediaPlayer.pause();
+        imgPlaySong.setImageResource(R.drawable.ic_play_button);
+    }
+
 
     private void initLayoutFragment(String songId) {
         PlaySongViewPagerAdapter playSongViewPagerAdapter = new PlaySongViewPagerAdapter(getSupportFragmentManager());
@@ -142,11 +178,14 @@ public class PlaySongActivity extends AppCompatActivity {
                 @Override
                 public void onChanged(ApiResponse<Song> songApiResponse) {
                     initLayoutActivity(songApiResponse.getData());
-                    playMusic(songApiResponse.getData().getSong_link());
+                    clearMediaPlayer();
+                    initMediaPlayer(songApiResponse.getData().getSong_link());
+                    playMusic();
                 }
             });
 
             lvMusicViewModel.fetchSong(Integer.parseInt(songId));
         }
     }
+
 }
