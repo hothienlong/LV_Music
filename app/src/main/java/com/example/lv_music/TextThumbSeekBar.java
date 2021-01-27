@@ -8,6 +8,7 @@ import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.text.TextPaint;
 import android.util.AttributeSet;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 
@@ -44,6 +45,7 @@ public class TextThumbSeekBar extends androidx.appcompat.widget.AppCompatSeekBar
 //        String progressText = String.valueOf(getProgress());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("m:ss");
         String totalTimeText = simpleDateFormat.format(getMax());
+        Toast.makeText(getContext(), totalTimeText, Toast.LENGTH_SHORT).show();
         String progressTimeText = simpleDateFormat.format(getProgress());
         String displayTime = progressTimeText + " / " + totalTimeText;
 

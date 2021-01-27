@@ -50,7 +50,6 @@ public class PlaySongActivity extends AppCompatActivity {
         setContentView(R.layout.activity_play_song);
         addControls();
         catchIntent();
-        addEvents();
     }
 
     private void addEvents() {
@@ -72,6 +71,7 @@ public class PlaySongActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        addEvents();
     }
 
     private void initMediaPlayer(String url) {
@@ -86,6 +86,12 @@ public class PlaySongActivity extends AppCompatActivity {
                                 .setUsage(AudioAttributes.USAGE_MEDIA)
                                 .build()
                 );
+                PlaySongActivity.mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        clearMediaPlayer();
+                    }
+                });
                 PlaySongActivity.mediaPlayer.setDataSource(url);
                 PlaySongActivity.mediaPlayer.prepare(); // might take long! (for buffering, etc)
 //                Toast.makeText(this, "play", Toast.LENGTH_SHORT).show();
@@ -97,6 +103,7 @@ public class PlaySongActivity extends AppCompatActivity {
     }
 
     private void seekBarTime() {
+        // get duration return int (milisecond) => format m:ss
         textThumbSeekBar.setMax(PlaySongActivity.mediaPlayer.getDuration());
     }
 
