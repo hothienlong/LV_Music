@@ -1,23 +1,17 @@
 package com.example.lv_music.Activity;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 
-import android.app.Service;
 import android.content.Intent;
-import android.graphics.Color;
 import android.media.AudioAttributes;
 import android.media.MediaPlayer;
-import android.os.Binder;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 
 import com.example.lv_music.Adapter.PlaySongViewPagerAdapter;
@@ -29,6 +23,7 @@ import com.example.lv_music.Model.ApiResponse;
 import com.example.lv_music.Model.Song;
 import com.example.lv_music.Model.SongItem;
 import com.example.lv_music.R;
+import com.example.lv_music.TextThumbSeekBar;
 import com.example.lv_music.ViewModel.LvMusicViewModel;
 
 import java.io.IOException;
@@ -42,6 +37,7 @@ public class PlaySongActivity extends AppCompatActivity {
     Toolbar toolbar;
     ImageView imgLikeSong, imgAddPlaylist, imgSuffle, imgBackward, imgPlaySong, imgForward, imgRepeat;
     CircleIndicator circleIndicator;
+    TextThumbSeekBar textThumbSeekBar;
 
     LvMusicViewModel lvMusicViewModel;
     public static MediaPlayer mediaPlayer; //tất cả activity chỉ có 1 mediaplayer duy nhất
@@ -150,6 +146,7 @@ public class PlaySongActivity extends AppCompatActivity {
         imgPlaySong = findViewById(R.id.imgPlaySong);
         imgForward = findViewById(R.id.imgForward);
         imgRepeat = findViewById(R.id.imgRepeat);
+        textThumbSeekBar = findViewById(R.id.textSeekbarPlaySong);
     }
 
     private void catchIntent() {
