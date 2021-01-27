@@ -2,6 +2,7 @@ package com.example.lv_music.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.text.method.NumberKeyListener;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -64,7 +65,9 @@ public class ListSingerAdapter extends RecyclerView.Adapter<ListSingerAdapter.Si
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, SingerActivity.class);
-                intent.putExtra("singer", singer);
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("singer", singer);
+                intent.putExtras(bundle);
                 context.startActivity(intent);
             }
         });

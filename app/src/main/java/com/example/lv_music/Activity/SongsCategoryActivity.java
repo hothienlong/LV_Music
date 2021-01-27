@@ -80,20 +80,6 @@ public class SongsCategoryActivity extends AppCompatActivity {
             }
         });
 
-//        URL url = null;
-//        try {
-//            url = new URL(mCategory.getImage());
-//            // thay thư viện picasso 2.8 -> 2.5.2 để ko bị lỗi dòng tạo bitmap
-//            Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-//            BitmapDrawable background = new BitmapDrawable(getResources(), bmp);
-//            imgCategory.setImageBitmap(bmp);
-//            collapsingToolbarLayout.setBackground(background);
-//        } catch (MalformedURLException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-
         collapsingToolbarLayout.setExpandedTitleColor(Color.TRANSPARENT);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -144,9 +130,12 @@ public class SongsCategoryActivity extends AppCompatActivity {
     private void catchIntent() {
         Intent intent = getIntent();
         if(intent != null){
-            if(intent.hasExtra("category")){
-                mCategory = (Category) intent.getSerializableExtra("category");
-                Toast.makeText(this, mCategory.getName(), Toast.LENGTH_SHORT).show();
+            Bundle bundle = intent.getExtras();
+            if(bundle != null){
+                if(intent.hasExtra("category")){
+                    mCategory = (Category) bundle.getParcelable("category");
+                    Toast.makeText(this, mCategory.getName(), Toast.LENGTH_SHORT).show();
+                }
             }
         }
     }

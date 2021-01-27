@@ -2,6 +2,7 @@ package com.example.lv_music.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,7 +51,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, SongsCategoryActivity.class);
-                intent.putExtra("category", categories.get(position));
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("category", categories.get(position));
+                intent.putExtras(bundle);
                 context.startActivity(intent);
             }
         });

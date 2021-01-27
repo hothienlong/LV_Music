@@ -29,23 +29,27 @@ public class SingerActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         if(intent != null){
-            if(intent.hasExtra("singer")){
-                Singer singer = (Singer) intent.getSerializableExtra("singer");
-                tvSingerName.setText(singer.getRealName());
-                tvBirthdate.setText(singer.getBirthdate());
-                tvCountry.setText(singer.getCountry());
-                tvInfomation.setText(singer.getInformation());
+            Bundle bundle = intent.getExtras();
 
-                setSupportActionBar(toolbar);
-                ActionBar actionBar = getSupportActionBar();
-                actionBar.setTitle(singer.getStageName());
-                actionBar.setDisplayHomeAsUpEnabled(true);
-                toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        finish();
-                    }
-                });
+            if(bundle != null){
+                if(intent.hasExtra("singer")){
+                    Singer singer = (Singer) bundle.getParcelable("singer");
+                    tvSingerName.setText(singer.getRealName());
+                    tvBirthdate.setText(singer.getBirthdate());
+                    tvCountry.setText(singer.getCountry());
+                    tvInfomation.setText(singer.getInformation());
+
+                    setSupportActionBar(toolbar);
+                    ActionBar actionBar = getSupportActionBar();
+                    actionBar.setTitle(singer.getStageName());
+                    actionBar.setDisplayHomeAsUpEnabled(true);
+                    toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            finish();
+                        }
+                    });
+                }
             }
         }
     }

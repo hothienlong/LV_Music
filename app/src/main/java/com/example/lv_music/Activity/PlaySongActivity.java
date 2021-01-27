@@ -182,7 +182,7 @@ public class PlaySongActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         if(intent != null){
-            Bundle bundle = getIntent().getExtras();
+            Bundle bundle = intent.getExtras();
             if(bundle != null){
                 SongItem songItem = null;
 
