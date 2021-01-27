@@ -55,6 +55,11 @@ public interface ApiRequest {
     Maybe<ApiResponse<List<SongItem>>> getAllSongItemsCategory(
             @Field("cate_id") Integer cate_id
     );
+    @FormUrlEncoded // parse sang dạng form để gửi lên
+    @POST("apiLV_Music/songitem.php")
+    Maybe<ApiResponse<SongItem>> getSongItem(
+            @Field("song_id") Integer song_id
+    );
 
     // singer
     @GET("apiLV_Music/all_singers.php")

@@ -38,11 +38,11 @@ public class PlaySongFragment1 extends Fragment {
     RecyclerView songItemRecyclerview;
     ArrayList<SongItem> songItems;
 
-    String mSongId;
+    SongItem songItem;
     LvMusicViewModel mLvMusicViewModel;
 
-    public PlaySongFragment1(String mSongId, ArrayList<SongItem> songItems) {
-        this.mSongId = mSongId;
+    public PlaySongFragment1(SongItem songItem, ArrayList<SongItem> songItems) {
+        this.songItem = songItem;
         this.songItems = songItems;
     }
 
@@ -112,9 +112,13 @@ public class PlaySongFragment1 extends Fragment {
                 tvSingerName.setText(singerNames.toString().substring(1, singerNames.toString().length()-1));
             }
         });
-        mLvMusicViewModel.fetchAllCategoriesOfSong(Integer.parseInt(mSongId));
-        mLvMusicViewModel.fetchAllSingersOfSong(Integer.parseInt(mSongId));
-        mLvMusicViewModel.fetchSong(Integer.parseInt(mSongId));
+        mLvMusicViewModel.fetchAllCategoriesOfSong(Integer.parseInt(songItem.getId()));
+//        mLvMusicViewModel.fetchAllSingersOfSong(Integer.parseInt(mSongId));
+//        mLvMusicViewModel.fetchSong(Integer.parseInt(mSongId));
+
+        List<String> singerNames = songItem.getLstSingerNames();
+
+        tvSingerName.setText(singerNames.toString().substring(1, singerNames.toString().length()-1));
     }
 
     private void addControls() {

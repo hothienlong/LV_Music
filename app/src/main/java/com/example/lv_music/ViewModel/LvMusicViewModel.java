@@ -40,6 +40,7 @@ public class LvMusicViewModel extends ViewModel {
     private SongItemRepository mSongItemRepository;
     private MutableLiveData<ApiResponse<List<SongItem>>> mAllSongItems;
     private MutableLiveData<ApiResponse<List<SongItem>>> mAllSongItemsCategory;
+    private MutableLiveData<ApiResponse<SongItem>> mSongItem;
     private SingerRepository mSingerRepository;
     private MutableLiveData<ApiResponse<List<Singer>>> mAllSingersOfSong;
     private MutableLiveData<ApiResponse<List<Singer>>> mAllSingers;
@@ -60,6 +61,7 @@ public class LvMusicViewModel extends ViewModel {
         mSongItemRepository = SongItemRepository.getInstance();
         mAllSongItems = new MutableLiveData<>();
         mAllSongItemsCategory = new MutableLiveData<>();
+        mSongItem = new MutableLiveData<>();
 
         mSingerRepository = SingerRepository.getInstance();
         mAllSingersOfSong = new MutableLiveData<>();
@@ -281,6 +283,37 @@ public class LvMusicViewModel extends ViewModel {
 
     public LiveData<ApiResponse<List<SongItem>>> getResponseAllSongItemsCategory(){
         return mAllSongItemsCategory;
+    }
+
+    public void fetchSongItem(Integer cate_id){
+        mSongItemRepository.getSongItem(cate_id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new MaybeObserver<ApiResponse<SongItem>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull ApiResponse<SongItem> songItemApiResponse) {
+                        mSongItem.setValue(songItemApiResponse);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.d("BBB", "Error : " + e.getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    public LiveData<ApiResponse<SongItem>> getResponseSongItem(){
+        return mSongItem;
     }
 
     public void fetchAllSongsCategory(Integer cate_id){

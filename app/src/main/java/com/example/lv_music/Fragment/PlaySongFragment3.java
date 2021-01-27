@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.lv_music.Model.ApiResponse;
 import com.example.lv_music.Model.Song;
+import com.example.lv_music.Model.SongItem;
 import com.example.lv_music.R;
 import com.example.lv_music.ViewModel.LvMusicViewModel;
 
@@ -24,11 +25,11 @@ public class PlaySongFragment3 extends Fragment {
     TextView tvLyric;
     View view;
 
-    String songId;
+    SongItem songItem;
     LvMusicViewModel mLvMusicViewModel;
 
-    public PlaySongFragment3(String songId) {
-        this.songId = songId;
+    public PlaySongFragment3(SongItem songItem) {
+        this.songItem = songItem;
     }
 
     @Nullable
@@ -55,7 +56,11 @@ public class PlaySongFragment3 extends Fragment {
             }
         });
 
-        mLvMusicViewModel.fetchSong(Integer.parseInt(songId));
+//        mLvMusicViewModel.fetchSong(Integer.parseInt(songId));
+        String lyric = songItem.getLyric();
+        if(lyric != null && lyric != ""){
+            tvLyric.setText(HtmlCompat.fromHtml(songItem.getLyric(), HtmlCompat.FROM_HTML_MODE_LEGACY));
+        }
     }
 
     private void addControls() {

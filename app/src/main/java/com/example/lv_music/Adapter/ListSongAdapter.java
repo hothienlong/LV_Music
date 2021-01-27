@@ -3,6 +3,8 @@ package com.example.lv_music.Adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -73,8 +75,10 @@ public class ListSongAdapter extends RecyclerView.Adapter<ListSongAdapter.SongVi
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, PlaySongActivity.class);
-                    intent.putExtra("song", songItem);
-                    intent.putExtra("listsongitem", songItems);
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable("songitem", songItem);
+                    bundle.putParcelableArrayList("listsongitem", songItems);
+                    intent.putExtras(bundle);
                     context.startActivity(intent);
                 }
             });

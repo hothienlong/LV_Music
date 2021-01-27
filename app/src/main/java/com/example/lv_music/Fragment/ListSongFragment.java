@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lv_music.Adapter.ListSongAdapter;
 import com.example.lv_music.Model.ApiResponse;
+import com.example.lv_music.Model.Song;
 import com.example.lv_music.Model.SongItem;
 import com.example.lv_music.R;
 import com.example.lv_music.ViewModel.LvMusicViewModel;
@@ -70,6 +71,7 @@ public class ListSongFragment extends Fragment {
         });
 
         mLvMusicViewModel.fetchAllSongItems();
+
     }
 
     private void addControls() {
