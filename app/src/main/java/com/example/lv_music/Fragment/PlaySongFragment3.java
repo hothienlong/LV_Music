@@ -47,8 +47,11 @@ public class PlaySongFragment3 extends Fragment {
         mLvMusicViewModel.getResponseSong().observe(getViewLifecycleOwner(), new Observer<ApiResponse<Song>>() {
             @Override
             public void onChanged(ApiResponse<Song> songApiResponse) {
-                tvLyric.setText(HtmlCompat.fromHtml(songApiResponse.getData().getLyric(), HtmlCompat.FROM_HTML_MODE_LEGACY));
+                String lyric = songApiResponse.getData().getLyric();
+                if(lyric != null && lyric != ""){
+                    tvLyric.setText(HtmlCompat.fromHtml(songApiResponse.getData().getLyric(), HtmlCompat.FROM_HTML_MODE_LEGACY));
 //                tvLyric.setText(songApiResponse.getData().getLyric());
+                }
             }
         });
 

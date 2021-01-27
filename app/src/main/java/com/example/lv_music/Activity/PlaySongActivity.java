@@ -41,7 +41,7 @@ public class PlaySongActivity extends AppCompatActivity {
     TextThumbSeekBar textThumbSeekBar;
 
     LvMusicViewModel lvMusicViewModel;
-    public static MediaPlayer mediaPlayer; //tất cả activity chỉ có 1 mediaplayer duy nhất
+    MediaPlayer mediaPlayer; //tất cả activity chỉ có 1 mediaplayer duy nhất
 
 
     @Override
@@ -56,8 +56,8 @@ public class PlaySongActivity extends AppCompatActivity {
         imgPlaySong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(PlaySongActivity.mediaPlayer != null){
-                    if(!PlaySongActivity.mediaPlayer.isPlaying()){
+                if(mediaPlayer != null){
+                    if(!mediaPlayer.isPlaying()){
                         playMusic();
                     }
                     else {
@@ -77,23 +77,23 @@ public class PlaySongActivity extends AppCompatActivity {
     private void initMediaPlayer(String url) {
 
         // mỗi lần chỉ đúng 1 bài nhạc đc khởi tạo
-        if(PlaySongActivity.mediaPlayer == null){
-            PlaySongActivity.mediaPlayer = new MediaPlayer();
+        if(mediaPlayer == null){
+            mediaPlayer = new MediaPlayer();
             try {
-                PlaySongActivity.mediaPlayer.setAudioAttributes(
+                mediaPlayer.setAudioAttributes(
                         new AudioAttributes.Builder()
                                 .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
                                 .setUsage(AudioAttributes.USAGE_MEDIA)
                                 .build()
                 );
-                PlaySongActivity.mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                     @Override
                     public void onCompletion(MediaPlayer mp) {
                         clearMediaPlayer();
                     }
                 });
-                PlaySongActivity.mediaPlayer.setDataSource(url);
-                PlaySongActivity.mediaPlayer.prepare(); // might take long! (for buffering, etc)
+                mediaPlayer.setDataSource(url);
+                mediaPlayer.prepare(); // might take long! (for buffering, etc)
 //                Toast.makeText(this, "play", Toast.LENGTH_SHORT).show();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -104,7 +104,7 @@ public class PlaySongActivity extends AppCompatActivity {
 
     private void seekBarTime() {
         // get duration return int (milisecond) => format m:ss
-        textThumbSeekBar.setMax(PlaySongActivity.mediaPlayer.getDuration());
+        textThumbSeekBar.setMax(mediaPlayer.getDuration());
     }
 
 
@@ -117,12 +117,12 @@ public class PlaySongActivity extends AppCompatActivity {
     }
 
     private void playMusic(){
-        PlaySongActivity.mediaPlayer.start();
+        mediaPlayer.start();
         imgPlaySong.setImageResource(R.drawable.ic_pause_button);
     }
 
     private void pauseMusic(){
-        PlaySongActivity.mediaPlayer.pause();
+        mediaPlayer.pause();
         imgPlaySong.setImageResource(R.drawable.ic_play_button);
     }
 
