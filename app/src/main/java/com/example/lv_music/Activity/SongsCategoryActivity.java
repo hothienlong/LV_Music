@@ -33,6 +33,7 @@ import com.squareup.picasso.Target;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -124,7 +125,8 @@ public class SongsCategoryActivity extends AppCompatActivity {
 //                    Log.d("BBB", listApiResponse.getData().get(i).toString());
 //                }
 
-                ListSongAdapter listSongAdapter = new ListSongAdapter(listApiResponse.getData());
+                // dùng lại adapter của list song
+                ListSongAdapter listSongAdapter = new ListSongAdapter((ArrayList<SongItem>) listApiResponse.getData());
 
                 //tăng performance
                 songItemRecyclerview.setHasFixedSize(true);

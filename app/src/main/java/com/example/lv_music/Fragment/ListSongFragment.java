@@ -19,6 +19,7 @@ import com.example.lv_music.Model.SongItem;
 import com.example.lv_music.R;
 import com.example.lv_music.ViewModel.LvMusicViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -55,7 +56,7 @@ public class ListSongFragment extends Fragment {
 //                    Log.d("BBB", listApiResponse.getData().get(i).toString());
 //                }
 
-                ListSongAdapter listSongAdapter = new ListSongAdapter(listApiResponse.getData());
+                ListSongAdapter listSongAdapter = new ListSongAdapter((ArrayList<SongItem>) listApiResponse.getData());
 
                 //tăng performance
                 songItemRecyclerview.setHasFixedSize(true);

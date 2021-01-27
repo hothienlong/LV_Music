@@ -20,15 +20,16 @@ import com.example.lv_music.Model.SongItem;
 import com.example.lv_music.R;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
 public class ListSongAdapter extends RecyclerView.Adapter<ListSongAdapter.SongViewHolder> {
 
     Context context;
-    List<SongItem> songItems;
+    ArrayList<SongItem> songItems; //dùng array list thay vì list mới intent đc
 
-    public ListSongAdapter(List<SongItem> songItems) {
+    public ListSongAdapter(ArrayList<SongItem> songItems) {
         this.songItems = songItems;
     }
 
@@ -68,6 +69,7 @@ public class ListSongAdapter extends RecyclerView.Adapter<ListSongAdapter.SongVi
             public void onClick(View v) {
                 Intent intent = new Intent(context, PlaySongActivity.class);
                 intent.putExtra("song", songItem);
+                intent.putExtra("listsongitem", songItems);
                 context.startActivity(intent);
             }
         });

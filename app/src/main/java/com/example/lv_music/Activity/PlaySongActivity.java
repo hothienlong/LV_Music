@@ -32,6 +32,7 @@ import com.example.lv_music.R;
 import com.example.lv_music.ViewModel.LvMusicViewModel;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import me.relex.circleindicator.CircleIndicator;
 
@@ -116,9 +117,9 @@ public class PlaySongActivity extends AppCompatActivity {
     }
 
 
-    private void initLayoutFragment(String songId) {
+    private void initLayoutFragment(String songId, ArrayList<SongItem> songItems) {
         PlaySongViewPagerAdapter playSongViewPagerAdapter = new PlaySongViewPagerAdapter(getSupportFragmentManager());
-        playSongViewPagerAdapter.addFragment(new PlaySongFragment1(songId));
+        playSongViewPagerAdapter.addFragment(new PlaySongFragment1(songId, songItems));
         playSongViewPagerAdapter.addFragment(new PlaySongFragment2());
         playSongViewPagerAdapter.addFragment(new PlaySongFragment3(songId));
         viewPager.setAdapter(playSongViewPagerAdapter);
@@ -158,7 +159,17 @@ public class PlaySongActivity extends AppCompatActivity {
         if(intent != null){
             lvMusicViewModel = ViewModelProviders.of(this).get(LvMusicViewModel.class);
             String songId = null;
+            ArrayList<SongItem> songItems = new ArrayList<>();
 
+            // Lấy danh sách bài hát
+            if(intent.hasExtra("listsongitem")){
+                // Nếu từ song page: tất cả các bài hát
+                // Nếu từ songs category: tất cả các bài hát trong category
+                // Nếu từ advertisement: ko có bài nào
+                songItems = (ArrayList<SongItem>) intent.getSerializableExtra("listsongitem");
+            }
+
+            // Lấy thông tin bài hát
             if(intent.hasExtra("song")){
                 SongItem songItem = (SongItem) intent.getSerializableExtra("song");
 //              Toast.makeText(this, songItem.getName(), Toast.LENGTH_SHORT).show();
@@ -172,7 +183,7 @@ public class PlaySongActivity extends AppCompatActivity {
             }
 
             // init layout before play music
-            initLayoutFragment(songId);
+            initLayoutFragment(songId, songItems);
 
             lvMusicViewModel.getResponseSong().observe(this, new Observer<ApiResponse<Song>>() {
                 @Override
@@ -180,7 +191,7 @@ public class PlaySongActivity extends AppCompatActivity {
                     initLayoutActivity(songApiResponse.getData());
                     clearMediaPlayer();
                     initMediaPlayer(songApiResponse.getData().getSong_link());
-                    playMusic();
+                    playMusic(); //có prepare nên lâu => lag giao diện
                 }
             });
 

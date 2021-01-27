@@ -114,6 +114,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
+            android:orientation="horizontal"
             android:background="@drawable/bg_ripple_effect"
             android:gravity="center_vertical"
             android:padding="5dp"
@@ -136,14 +137,26 @@
             </ImageView>
         </LinearLayout>
 
-        <fragment
-            android:tag="playsong1"
-            android:id="@+id/fragmentListSong"
-            android:name="com.example.lv_music.Fragment.ListSongFragment"
+<!--        <fragment-->
+<!--            android:tag="playsong1"-->
+<!--            android:id="@+id/fragmentListSong"-->
+<!--            android:name="com.example.lv_music.Fragment.ListSongFragment"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            tools:layout="@layout/fragment_list_song">-->
+<!--        </fragment>-->
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layoutAnimation="@anim/layout_animation"
+            tools:listitem="@layout/layout_list_song_item"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="vertical"
+            android:id="@+id/songItemRecyclerview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:layout="@layout/fragment_list_song">
-        </fragment>
+            android:layout_height="wrap_content">
+        </androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>
 
 

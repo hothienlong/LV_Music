@@ -14,28 +14,36 @@ import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.lv_music.Adapter.ListSongAdapter;
 import com.example.lv_music.Model.ApiResponse;
 import com.example.lv_music.Model.Category;
 import com.example.lv_music.Model.Singer;
 import com.example.lv_music.Model.Song;
+import com.example.lv_music.Model.SongItem;
 import com.example.lv_music.R;
 import com.example.lv_music.ViewModel.LvMusicViewModel;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class PlaySongFragment1 extends Fragment {
 
     View view;
-    Fragment fragment;
+//    Fragment fragment;
     TextView tvSongName, tvSingerName, tvCategoryName, tvNumLike;
+    RecyclerView songItemRecyclerview;
+    ArrayList<SongItem> songItems;
 
     String mSongId;
     LvMusicViewModel mLvMusicViewModel;
 
-    public PlaySongFragment1(String mSongId) {
+    public PlaySongFragment1(String mSongId, ArrayList<SongItem> songItems) {
         this.mSongId = mSongId;
+        this.songItems = songItems;
     }
 
     public PlaySongFragment1() {
@@ -61,8 +69,20 @@ public class PlaySongFragment1 extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void init() {
 
-        mLvMusicViewModel = ViewModelProviders.of(this).get(LvMusicViewModel.class);
+        // -- Gắn giao diện recyclerview
+        ListSongAdapter listSongAdapter = new ListSongAdapter(songItems);
 
+        //tăng performance
+        songItemRecyclerview.setHasFixedSize(true);
+
+        songItemRecyclerview.setAdapter(listSongAdapter);
+
+        //animation
+        songItemRecyclerview.scheduleLayoutAnimation();
+
+
+        // -- Gắn giao diện thông tin bài hát
+        mLvMusicViewModel = ViewModelProviders.of(this).get(LvMusicViewModel.class);
         // get name of song
         mLvMusicViewModel.getResponseSong().observe(getViewLifecycleOwner(), new Observer<ApiResponse<Song>>() {
             @Override
@@ -102,5 +122,6 @@ public class PlaySongFragment1 extends Fragment {
         tvSongName = view.findViewById(R.id.tvSongName);
         tvCategoryName = view.findViewById(R.id.tvCategoryName);
         tvNumLike = view.findViewById(R.id.tvNumLike);
+        songItemRecyclerview = view.findViewById(R.id.songItemRecyclerview);
     }
 }
