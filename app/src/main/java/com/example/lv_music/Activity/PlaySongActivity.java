@@ -116,7 +116,7 @@ public class PlaySongActivity extends AppCompatActivity {
         imgPlaySong.setImageResource(R.drawable.ic_play_button);
     }
 
-
+    // giao diện, thông tin, danh sách bài hát
     private void initLayoutFragment(String songId, ArrayList<SongItem> songItems) {
         PlaySongViewPagerAdapter playSongViewPagerAdapter = new PlaySongViewPagerAdapter(getSupportFragmentManager());
         playSongViewPagerAdapter.addFragment(new PlaySongFragment1(songId, songItems));
@@ -199,4 +199,9 @@ public class PlaySongActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        clearMediaPlayer();
+    }
 }
