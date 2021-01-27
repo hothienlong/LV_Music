@@ -27,6 +27,7 @@ import com.example.lv_music.TextThumbSeekBar;
 import com.example.lv_music.ViewModel.LvMusicViewModel;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import me.relex.circleindicator.CircleIndicator;
@@ -92,7 +93,13 @@ public class PlaySongActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+        seekBarTime();
     }
+
+    private void seekBarTime() {
+        textThumbSeekBar.setMax(PlaySongActivity.mediaPlayer.getDuration());
+    }
+
 
     private void clearMediaPlayer() {
         if(mediaPlayer != null){

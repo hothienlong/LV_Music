@@ -9,6 +9,8 @@ import android.graphics.Typeface;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 
+import java.text.SimpleDateFormat;
+
 public class TextThumbSeekBar extends androidx.appcompat.widget.AppCompatSeekBar {
 
     private int mThumbSize;
@@ -38,10 +40,17 @@ public class TextThumbSeekBar extends androidx.appcompat.widget.AppCompatSeekBar
     protected synchronized void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        String progressText = String.valueOf(getProgress());
-        Rect bounds = new Rect();
-        mTextPaint.getTextBounds(progressText, 0, progressText.length(), bounds);
+        // Thiết lập text hiển thị
+//        String progressText = String.valueOf(getProgress());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("m:ss");
+        String totalTimeText = simpleDateFormat.format(getMax());
+        String progressTimeText = simpleDateFormat.format(getProgress());
+        String displayTime = progressTimeText + " / " + totalTimeText;
 
+        Rect bounds = new Rect();
+        mTextPaint.getTextBounds(displayTime, 0, displayTime.length(), bounds);
+
+        // Thiết lập vị trí
         int leftPadding = getPaddingLeft() - getThumbOffset();
         int rightPadding = getPaddingRight() - getThumbOffset();
         int width = getWidth() - leftPadding - rightPadding;
@@ -49,6 +58,6 @@ public class TextThumbSeekBar extends androidx.appcompat.widget.AppCompatSeekBar
         float thumbOffset = mThumbSize * (.5f - progressRatio);
         float thumbX = progressRatio * width + leftPadding + thumbOffset;
         float thumbY = getHeight() / 2f + bounds.height() / 2f;
-        canvas.drawText(progressText, thumbX, thumbY, mTextPaint);
+        canvas.drawText(displayTime, thumbX, thumbY, mTextPaint);
     }
 }
