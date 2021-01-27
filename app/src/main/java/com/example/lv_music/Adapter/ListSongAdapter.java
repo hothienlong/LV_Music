@@ -2,6 +2,7 @@ package com.example.lv_music.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +16,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.lv_music.Activity.MainActivity;
 import com.example.lv_music.Activity.PlaySongActivity;
+import com.example.lv_music.Activity.SongsCategoryActivity;
+import com.example.lv_music.Fragment.ListSongFragment;
 import com.example.lv_music.Model.SongItem;
 import com.example.lv_music.R;
 import com.squareup.picasso.Picasso;
@@ -64,15 +68,23 @@ public class ListSongAdapter extends RecyclerView.Adapter<ListSongAdapter.SongVi
         }
 
         // bắt sự kiện bấm vào 1 bài hát
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, PlaySongActivity.class);
-                intent.putExtra("song", songItem);
-                intent.putExtra("listsongitem", songItems);
-                context.startActivity(intent);
-            }
-        });
+        if(context instanceof MainActivity || context instanceof SongsCategoryActivity){
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, PlaySongActivity.class);
+                    intent.putExtra("song", songItem);
+                    intent.putExtra("listsongitem", songItems);
+                    context.startActivity(intent);
+                }
+            });
+        }
+        else if(context instanceof PlaySongActivity){
+            // Nếu đang ở PlaySongActivity thì xử lí cách khác
+            holder.tvSongName.setTextColor(Color.WHITE);
+            holder.tvSingerName.setTextColor(Color.WHITE);
+            holder.optionSongItem.setImageResource(R.drawable.ic_more_white);
+        }
 
     }
 
@@ -85,7 +97,7 @@ public class ListSongAdapter extends RecyclerView.Adapter<ListSongAdapter.SongVi
     class SongViewHolder extends RecyclerView.ViewHolder{
 
         TextView tvSongName, tvSingerName;
-        ImageView imgSong;
+        ImageView imgSong, optionSongItem;
 
         // ánh xạ
         public SongViewHolder(@NonNull View itemView) {
@@ -93,6 +105,7 @@ public class ListSongAdapter extends RecyclerView.Adapter<ListSongAdapter.SongVi
             tvSingerName = itemView.findViewById(R.id.tvSingerName);
             tvSongName = itemView.findViewById(R.id.tvSongName);
             imgSong = itemView.findViewById(R.id.imgSong);
+            optionSongItem = itemView.findViewById(R.id.optionSongItem);
         }
     }
 }

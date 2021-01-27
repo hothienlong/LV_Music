@@ -59,8 +59,9 @@
 
 
     <ImageView
+        android:id="@+id/optionSongItem"
         android:layout_gravity="center_vertical"
-        android:src="@drawable/ic_more"
+        android:src="@drawable/ic_more_black"
         android:layout_marginRight="5dp"
         android:layout_width="20dp"
         android:layout_height="20dp">
