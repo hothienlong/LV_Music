@@ -84,7 +84,7 @@ public class PlaySongFragment1 extends Fragment {
         // -- Gắn giao diện thông tin bài hát
         mLvMusicViewModel = ViewModelProviders.of(this).get(LvMusicViewModel.class);
         // get name of song
-        mLvMusicViewModel.getResponseSong().observe(getViewLifecycleOwner(), new Observer<ApiResponse<Song>>() {
+        mLvMusicViewModel.getResponseSong().observe(getActivity(), new Observer<ApiResponse<Song>>() {
             @Override
             public void onChanged(ApiResponse<Song> songApiResponse) {
                 tvSongName.setText(songApiResponse.getData().getName());
@@ -92,7 +92,7 @@ public class PlaySongFragment1 extends Fragment {
         });
 
         // get categories of song
-        mLvMusicViewModel.getResponseAllCategoriesOfSong().observe(getViewLifecycleOwner(), new androidx.lifecycle.Observer<ApiResponse<List<Category>>>() {
+        mLvMusicViewModel.getResponseAllCategoriesOfSong().observe(getActivity(), new androidx.lifecycle.Observer<ApiResponse<List<Category>>>() {
             @Override
             public void onChanged(ApiResponse<List<Category>> listApiResponse) {
                 List<String> categoryNames = listApiResponse.getData().stream()
@@ -103,7 +103,7 @@ public class PlaySongFragment1 extends Fragment {
         });
 
         // get singers of song
-        mLvMusicViewModel.getResponseAllSingersOfSong().observe(getViewLifecycleOwner(), new Observer<ApiResponse<List<Singer>>>() {
+        mLvMusicViewModel.getResponseAllSingersOfSong().observe(getActivity(), new Observer<ApiResponse<List<Singer>>>() {
             @Override
             public void onChanged(ApiResponse<List<Singer>> listApiResponse) {
                 List<String> singerNames = listApiResponse.getData().stream()

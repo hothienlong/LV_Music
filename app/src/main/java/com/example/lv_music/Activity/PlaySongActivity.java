@@ -9,10 +9,14 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Intent;
 import android.media.AudioAttributes;
 import android.media.MediaPlayer;
+import android.media.TimedText;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.Toast;
 
 
@@ -46,17 +50,22 @@ public class PlaySongActivity extends AppCompatActivity {
     LvMusicViewModel lvMusicViewModel;
     MediaPlayer mediaPlayer; //tất cả activity chỉ có 1 mediaplayer duy nhất
     ArrayList<SongItem> songItems = new ArrayList<>();
+    Handler handlerPlayMusic = new Handler();;
+    Runnable runnablePlayMusic;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_song);
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
         addControls();
 
     }
 
     private void addEvents() {
+
         imgPlaySong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,6 +79,45 @@ public class PlaySongActivity extends AppCompatActivity {
                 }
             }
         });
+
+        // sự kiện seekbar
+        textThumbSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+            }
+
+            // kéo thumb
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                handlerPlayMusic.removeCallbacks(runnablePlayMusic);
+            }
+
+            // dừng kéo thumb
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                handlerPlayMusic.postDelayed(runnablePlayMusic, 100);
+                mediaPlayer.seekTo(seekBar.getProgress());
+            }
+        });
+    }
+
+    private void upDateTimeSong() {
+        runnablePlayMusic = new Runnable() {
+            @Override
+            public void run() {
+                Log.d("CCC", "gau gau");
+                if(mediaPlayer != null){
+                    Log.d("CCC", "gay gay");
+
+                    if(mediaPlayer.isPlaying()){
+                        textThumbSeekBar.setProgress(mediaPlayer.getCurrentPosition());
+                    }
+                    handlerPlayMusic.postDelayed(this, 100);
+                }
+            }
+        };
+        handlerPlayMusic.postDelayed(runnablePlayMusic, 100);
     }
 
     @Override
@@ -100,6 +148,7 @@ public class PlaySongActivity extends AppCompatActivity {
                             @Override
                             public void onCompletion(MediaPlayer mp) {
                                 clearMediaPlayer();
+                                finish();
                             }
                         });
                         mediaPlayer.setDataSource(url);
@@ -121,23 +170,31 @@ public class PlaySongActivity extends AppCompatActivity {
         textThumbSeekBar.setMax(mediaPlayer.getDuration());
     }
 
-
+    // clear when stop music
     private void clearMediaPlayer() {
         if(mediaPlayer != null){
             mediaPlayer.stop();
             mediaPlayer.release();
             mediaPlayer = null;
+            handlerPlayMusic.removeCallbacks(runnablePlayMusic);
+            Toast.makeText(this, "clear", Toast.LENGTH_SHORT).show();
         }
     }
 
     private void playMusic(){
         mediaPlayer.start();
         imgPlaySong.setImageResource(R.drawable.ic_pause_button);
+        // cập nhật time song
+        upDateTimeSong();
+
+//        PlaySongFragment2.discStart();
     }
 
     private void pauseMusic(){
         mediaPlayer.pause();
+        handlerPlayMusic.postDelayed(runnablePlayMusic, 100);
         imgPlaySong.setImageResource(R.drawable.ic_play_button);
+//        PlaySongFragment2.discPause();
     }
 
     // giao diện, thông tin, danh sách bài hát

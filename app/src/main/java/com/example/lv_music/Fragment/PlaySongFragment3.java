@@ -45,7 +45,7 @@ public class PlaySongFragment3 extends Fragment {
         mLvMusicViewModel = ViewModelProviders.of(this).get(LvMusicViewModel.class);
 
         // get name of song
-        mLvMusicViewModel.getResponseSong().observe(getViewLifecycleOwner(), new Observer<ApiResponse<Song>>() {
+        mLvMusicViewModel.getResponseSong().observe(getActivity(), new Observer<ApiResponse<Song>>() {
             @Override
             public void onChanged(ApiResponse<Song> songApiResponse) {
                 String lyric = songApiResponse.getData().getLyric();

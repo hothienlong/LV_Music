@@ -54,7 +54,7 @@ public class AdvertisementFragment extends Fragment {
         mLvMusicViewModel = ViewModelProviders.of(this).get(LvMusicViewModel.class);
 
         // 3 : Fetch all advertisements
-        mLvMusicViewModel.getResponseAllAdvertisements().observe(getViewLifecycleOwner(), new Observer<ApiResponse<List<Advertisement>>>() {
+        mLvMusicViewModel.getResponseAllAdvertisements().observe(getActivity(), new Observer<ApiResponse<List<Advertisement>>>() {
             @Override
             public void onChanged(ApiResponse<List<Advertisement>> listApiResponse) {
 //                for(int i=0;i<listApiResponse.getData().size();i++){

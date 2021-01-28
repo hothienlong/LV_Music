@@ -38,7 +38,7 @@ public class CategoryFragment extends Fragment {
         mLvMusicViewModel = ViewModelProviders.of(this).get(LvMusicViewModel.class);
 
         // Fetch all categories
-        mLvMusicViewModel.getResponseAllCategories().observe(getViewLifecycleOwner(), new Observer<ApiResponse<List<Category>>>() {
+        mLvMusicViewModel.getResponseAllCategories().observe(getActivity(), new Observer<ApiResponse<List<Category>>>() {
             @Override
             public void onChanged(ApiResponse<List<Category>> listApiResponse) {
 //                for(int i=0;i<listApiResponse.getData().size();i++){

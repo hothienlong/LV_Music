@@ -50,7 +50,7 @@ public class ListSongFragment extends Fragment {
         // 1: Fetch all song
         mLvMusicViewModel = ViewModelProviders.of(this).get(LvMusicViewModel.class);
 
-        mLvMusicViewModel.getResponseAllSongItems().observe(getViewLifecycleOwner(), new Observer<ApiResponse<List<SongItem>>>() {
+        mLvMusicViewModel.getResponseAllSongItems().observe(getActivity(), new Observer<ApiResponse<List<SongItem>>>() {
             @Override
             public void onChanged(ApiResponse<List<SongItem>> listApiResponse) {
 //                for(int i=0;i<listApiResponse.getData().size();i++){
