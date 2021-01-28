@@ -2,6 +2,7 @@ package com.example.lv_music.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -62,7 +63,9 @@ public class AdvertisementAdapter extends PagerAdapter {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, PlaySongActivity.class);
-                intent.putExtra("advertisement", advertisements.get(position));
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("advertisement", advertisements.get(position));
+                intent.putExtras(bundle);
                 context.startActivity(intent);
             }
         });

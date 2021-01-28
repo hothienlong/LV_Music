@@ -131,11 +131,9 @@ public class SongsCategoryActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if(intent != null){
             Bundle bundle = intent.getExtras();
-            if(bundle != null){
-                if(intent.hasExtra("category")){
-                    mCategory = (Category) bundle.getParcelable("category");
-                    Toast.makeText(this, mCategory.getName(), Toast.LENGTH_SHORT).show();
-                }
+            if(intent.hasExtra("category")){
+                mCategory = bundle.getParcelable("category");
+//                Toast.makeText(this, mCategory.getName(), Toast.LENGTH_SHORT).show();
             }
         }
     }

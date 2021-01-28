@@ -182,51 +182,51 @@ public class PlaySongActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         if(intent != null){
+
             Bundle bundle = intent.getExtras();
-            if(bundle != null){
-                SongItem songItem = null;
+            SongItem songItem = null;
 
+            // Lấy danh sách bài hát
+            if(intent.hasExtra("listsongitem")){
+                // Nếu từ song page: tất cả các bài hát
+                // Nếu từ songs category: tất cả các bài hát trong category
+                // Nếu từ advertisement: ko có bài nào
 
-                // Lấy danh sách bài hát
-                if(intent.hasExtra("listsongitem")){
-                    // Nếu từ song page: tất cả các bài hát
-                    // Nếu từ songs category: tất cả các bài hát trong category
-                    // Nếu từ advertisement: ko có bài nào
+                songItems = bundle.getParcelableArrayList("listsongitem");
+            }
 
-                    songItems = bundle.getParcelableArrayList("listsongitem");
-                }
+            // Lấy thông tin bài hát
+            if(intent.hasExtra("songitem")){
+                songItem = bundle.getParcelable("songitem");
 
-                // Lấy thông tin bài hát
-                if(intent.hasExtra("songitem")){
-                    songItem = (SongItem) bundle.getParcelable("songitem");
+                // init layout before play music
+                initLayoutFragment(songItem, songItems);
 
-                    // init layout before play music
-                    initLayoutFragment(songItem, songItems);
+                initLayoutActivity(songItem);
 
-                    initLayoutActivity(songItem);
+                initMediaPlayer(songItem.getSong_link());
+            }
+            else if(intent.hasExtra("advertisement")) {
 
-                    initMediaPlayer(songItem.getSong_link());
-                }
-                else if(intent.hasExtra("advertisement")){
-                    Advertisement advertisement = (Advertisement) intent.getSerializableExtra("advertisement");
-                    String songId = advertisement.getSongId();
-                    lvMusicViewModel = ViewModelProviders.of(this).get(LvMusicViewModel.class);
-                    lvMusicViewModel.getResponseSongItem().observe(this, new Observer<ApiResponse<SongItem>>() {
-                        @Override
-                        public void onChanged(ApiResponse<SongItem> songItemApiResponse) {
-                            // init layout before play music
-                            initLayoutFragment(songItemApiResponse.getData(), songItems);
+                Advertisement advertisement = bundle.getParcelable("advertisement");
+                String songId = advertisement.getSongId();
+                lvMusicViewModel = ViewModelProviders.of(this).get(LvMusicViewModel.class);
+                lvMusicViewModel.getResponseSongItem().observe(this, new Observer<ApiResponse<SongItem>>() {
+                    @Override
+                    public void onChanged(ApiResponse<SongItem> songItemApiResponse) {
+                        // init layout before play music
+                        initLayoutFragment(songItemApiResponse.getData(), songItems);
 
-                            initLayoutActivity(songItemApiResponse.getData());
+                        initLayoutActivity(songItemApiResponse.getData());
 
-                            initMediaPlayer(songItemApiResponse.getData().getSong_link());
+                        initMediaPlayer(songItemApiResponse.getData().getSong_link());
 
-                        }
-                    });
-                    lvMusicViewModel.fetchSongItem(Integer.parseInt(songId));
-                }
+                    }
+                });
+                lvMusicViewModel.fetchSongItem(Integer.parseInt(songId));
             }
         }
+
     }
 
     @Override
