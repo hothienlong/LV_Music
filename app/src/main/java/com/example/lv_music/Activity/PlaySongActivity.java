@@ -198,13 +198,14 @@ public class PlaySongActivity extends AppCompatActivity {
             // Lấy thông tin bài hát
             if(intent.hasExtra("songitem")){
                 songItem = bundle.getParcelable("songitem");
-
+                Log.d("ABC",songItem.toString());
                 // init layout before play music
                 initLayoutFragment(songItem, songItems);
 
                 initLayoutActivity(songItem);
 
                 initMediaPlayer(songItem.getSong_link());
+//                Log.d("ABC",songItem.getSong_link());
             }
             else if(intent.hasExtra("advertisement")) {
 
@@ -220,6 +221,7 @@ public class PlaySongActivity extends AppCompatActivity {
                         initLayoutActivity(songItemApiResponse.getData());
 
                         initMediaPlayer(songItemApiResponse.getData().getSong_link());
+//                        Log.d("ABC",songItemApiResponse.getData().getSong_link());
 
                     }
                 });
