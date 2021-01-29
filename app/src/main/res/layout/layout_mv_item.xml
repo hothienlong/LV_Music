@@ -4,7 +4,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/bg_ripple_effect">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardviewCategory"
@@ -29,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:text="Song title"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textColor="@color/black"
         />
 
@@ -38,6 +39,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Singer"
-        android:textSize="17sp"
+        android:textSize="15sp"
         />
 </LinearLayout>

@@ -71,6 +71,9 @@ dependencies {
     //viewmodel
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 
+    //pull to refresh
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
+
 
 }
 

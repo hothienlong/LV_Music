@@ -3,6 +3,7 @@ package com.example.lv_music.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ public class MVActivity extends AppCompatActivity {
     LvMusicViewModel mViewModel;
     MVAdapter mAdapter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +34,11 @@ public class MVActivity extends AppCompatActivity {
         mBinding.tbMV.setNavigationOnClickListener(view ->
                 finish()
         );
+
+        mBinding.spRefresh.setOnRefreshListener(() ->{
+          mAdapter.notifyDataSetChanged();
+          mBinding.spRefresh.setRefreshing(false);
+        });
 
         mViewModel = new ViewModelProvider(this).get(LvMusicViewModel.class);
         mViewModel.fetchAllSongItems();
@@ -55,9 +62,6 @@ public class MVActivity extends AppCompatActivity {
             mBinding.rvMV.setAdapter(mAdapter);
         });
         mBinding.rvMV.setHasFixedSize(true);
-
-
-
 
     }
 }
