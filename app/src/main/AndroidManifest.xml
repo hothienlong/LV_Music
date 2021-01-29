@@ -14,6 +14,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".Activity.MVActivity"></activity>
         <activity android:name=".Activity.ListSingerActivity" />
+        <activity android:name=".Activity.YoutubeActivity" />
         <activity android:name=".Activity.SingerActivity" />
         <activity android:name=".Activity.SongsCategoryActivity" />
         <activity android:name=".Activity.PlaySongActivity" />

@@ -22,6 +22,7 @@ public class MVAdapter extends RecyclerView.Adapter<MVAdapter.ViewHolder> {
 
     Context context;
     List<SongItem> songItems;
+    private onMVClickedListener mListener;
 
     public MVAdapter(Context context, List<SongItem> songItems) {
         this.context = context;
@@ -63,6 +64,20 @@ public class MVAdapter extends RecyclerView.Adapter<MVAdapter.ViewHolder> {
             tvTitle = itemView.findViewById(R.id.tvTitle);
             tvSinger = itemView.findViewById(R.id.tvSinger);
             ivMV = itemView.findViewById(R.id.imgMV);
+
+            itemView.setOnClickListener(view ->
+                    mListener.onMvClicked(songItems
+                            .get(getAdapterPosition())
+                            .getMv_link()));
         }
+
+    }
+
+    public interface onMVClickedListener{
+        void onMvClicked(String mv_link);
+    }
+
+    public void setOnMVClickedListener(onMVClickedListener listener){
+        mListener = listener;
     }
 }
