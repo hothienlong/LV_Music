@@ -25,14 +25,18 @@ public class AdvertisementAdapter extends PagerAdapter {
     Context context;
     List<Advertisement> advertisements;
 
-    public AdvertisementAdapter(Context context, List<Advertisement> advertisements) {
-        this.context = context;
+    public void submitList(List<Advertisement> advertisements){
         this.advertisements = advertisements;
+        notifyDataSetChanged();
+    }
+
+    public AdvertisementAdapter(Context context) {
+        this.context = context;
     }
 
     @Override
     public int getCount() {
-        return advertisements.size();
+        return advertisements!=null?advertisements.size():0;
     }
 
 

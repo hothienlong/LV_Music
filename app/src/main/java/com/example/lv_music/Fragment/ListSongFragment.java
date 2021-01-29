@@ -1,6 +1,7 @@
 package com.example.lv_music.Fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,6 +57,7 @@ public class ListSongFragment extends Fragment {
 //                for(int i=0;i<listApiResponse.getData().size();i++){
 //                    Log.d("BBB", listApiResponse.getData().get(i).toString());
 //                }
+//                Log.d("ABC",listApiResponse.getData().toString());
 
                 ListSongAdapter listSongAdapter = new ListSongAdapter((ArrayList<SongItem>) listApiResponse.getData());
 
