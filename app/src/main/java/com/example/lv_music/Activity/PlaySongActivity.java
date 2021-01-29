@@ -52,7 +52,7 @@ public class PlaySongActivity extends AppCompatActivity {
     ArrayList<SongItem> songItems = new ArrayList<>();
     Handler handlerPlayMusic = new Handler();;
     Runnable runnablePlayMusic;
-
+    Boolean isMediaPrepared = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,16 +65,17 @@ public class PlaySongActivity extends AppCompatActivity {
     }
 
     private void addEvents() {
-
         imgPlaySong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(mediaPlayer != null){
-                    if(!mediaPlayer.isPlaying()){
-                        playMusic();
-                    }
-                    else {
-                        pauseMusic();
+                    if(isMediaPrepared == true){
+                        if(!mediaPlayer.isPlaying()){
+                            playMusic();
+                        }
+                        else {
+                            pauseMusic();
+                        }
                     }
                 }
             }
@@ -144,6 +145,12 @@ public class PlaySongActivity extends AppCompatActivity {
                                         .setUsage(AudioAttributes.USAGE_MEDIA)
                                         .build()
                         );
+                        mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                            @Override
+                            public void onPrepared(MediaPlayer mp) {
+                                isMediaPrepared = true;
+                            }
+                        });
                         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                             @Override
                             public void onCompletion(MediaPlayer mp) {
@@ -158,8 +165,8 @@ public class PlaySongActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
-                playMusic(); //có prepare nên lâu => lag giao diện
                 seekBarTime();
+                playMusic(); //có prepare nên lâu => lag giao diện
             }
         }).start();
 
@@ -182,19 +189,23 @@ public class PlaySongActivity extends AppCompatActivity {
     }
 
     private void playMusic(){
-        mediaPlayer.start();
-        imgPlaySong.setImageResource(R.drawable.ic_pause_button);
-        // cập nhật time song
-        upDateTimeSong();
+        if(mediaPlayer != null){
+            mediaPlayer.start();
+            imgPlaySong.setImageResource(R.drawable.ic_pause_button);
+            // cập nhật time song
+            upDateTimeSong();
 
 //        PlaySongFragment2.discStart();
+        }
     }
 
     private void pauseMusic(){
-        mediaPlayer.pause();
-        handlerPlayMusic.postDelayed(runnablePlayMusic, 100);
-        imgPlaySong.setImageResource(R.drawable.ic_play_button);
+        if(mediaPlayer != null){
+            mediaPlayer.pause();
+            handlerPlayMusic.postDelayed(runnablePlayMusic, 100);
+            imgPlaySong.setImageResource(R.drawable.ic_play_button);
 //        PlaySongFragment2.discPause();
+        }
     }
 
     // giao diện, thông tin, danh sách bài hát
