@@ -4,10 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.example.lv_music.Adapter.MVAdapter;
+import com.example.lv_music.Model.SongItem;
 import com.example.lv_music.R;
 import com.example.lv_music.ViewModel.LvMusicViewModel;
 import com.example.lv_music.databinding.ActivityMVBinding;
@@ -15,6 +18,7 @@ import com.example.lv_music.databinding.ActivityMVBinding;
 public class MVActivity extends AppCompatActivity {
     ActivityMVBinding mBinding;
     LvMusicViewModel mViewModel;
+    MVAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +35,17 @@ public class MVActivity extends AppCompatActivity {
         mViewModel = new ViewModelProvider(this).get(LvMusicViewModel.class);
         mViewModel.fetchAllSongItems();
         mViewModel.getResponseAllSongItems().observe(this, listApiResponse -> {
-            MVAdapter adapter = new MVAdapter(this, listApiResponse.getData());
-            mBinding.rvMV.setAdapter(adapter);
+            mAdapter = new MVAdapter(this, listApiResponse.getData());
+            mAdapter.setOnMVClickedListener(mv_link -> {
+                Intent intent = new Intent(this,YoutubeActivity.class);
+                intent.putExtra("mv_link",mv_link);
+                startActivity(intent);
+            });
+            mBinding.rvMV.setAdapter(mAdapter);
         });
         mBinding.rvMV.setHasFixedSize(true);
+
+
 
 
     }
