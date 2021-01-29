@@ -41,13 +41,17 @@ public class MVAdapter extends RecyclerView.Adapter<MVAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         SongItem currentSong = songItems.get(position);
         holder.tvTitle.setText(currentSong.getName());
-        holder.tvSinger.setText(currentSong.getLstSingerNames().get(0));
+        holder.tvSinger.setText(currentSong.getLstSingerNames()
+                .toString()
+                .substring(1, currentSong.getLstSingerNames().toString().length()-1)
+        );
         try {
             Picasso.get().load(currentSong.getImage()).into(holder.ivMV);
         }
         catch (IllegalArgumentException e){
             Log.d("BBB", e.getMessage());
         }
+
     }
 
     @Override
