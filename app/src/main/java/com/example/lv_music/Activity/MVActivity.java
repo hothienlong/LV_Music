@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.lv_music.Adapter.MVAdapter;
 import com.example.lv_music.Model.SongItem;
@@ -37,9 +38,19 @@ public class MVActivity extends AppCompatActivity {
         mViewModel.getResponseAllSongItems().observe(this, listApiResponse -> {
             mAdapter = new MVAdapter(this, listApiResponse.getData());
             mAdapter.setOnMVClickedListener(mv_link -> {
-                Intent intent = new Intent(this,YoutubeActivity.class);
-                intent.putExtra("mv_link",mv_link);
-                startActivity(intent);
+                try {
+                    if(mv_link != null){
+                        Intent intent = new Intent(this,YoutubeActivity.class);
+                        intent.putExtra("mv_link",mv_link);
+                        startActivity(intent);
+                    }
+                    else{
+                        Toast.makeText(this, "Bài hát hiện chưa có link MV", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                catch (Exception e){
+                    Log.d("EEE", e.getMessage());
+                }
             });
             mBinding.rvMV.setAdapter(mAdapter);
         });
