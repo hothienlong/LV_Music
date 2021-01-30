@@ -32,12 +32,12 @@
             android:layout_marginBottom="5dp"></me.relex.circleindicator.CircleIndicator>
 
 
-        <androidx.viewpager.widget.ViewPager
+        <androidx.viewpager2.widget.ViewPager2
             android:layout_below="@id/playSongIndicator"
             android:id="@+id/playSongViewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-        </androidx.viewpager.widget.ViewPager>
+        </androidx.viewpager2.widget.ViewPager2>
 
 
     </RelativeLayout>
