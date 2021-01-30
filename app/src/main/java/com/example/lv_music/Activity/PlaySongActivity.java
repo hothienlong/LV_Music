@@ -39,8 +39,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.logging.Logger;
-
-import me.relex.circleindicator.CircleIndicator;
+import me.relex.circleindicator.CircleIndicator3;
 
 public class PlaySongActivity extends AppCompatActivity {
 
@@ -48,7 +47,7 @@ public class PlaySongActivity extends AppCompatActivity {
     PlaySongViewPager2Adapter playSongViewPagerAdapter;
     Toolbar toolbar;
     ImageView imgLikeSong, imgAddPlaylist, imgSuffle, imgBackward, imgPlaySong, imgForward, imgRepeat;
-    CircleIndicator circleIndicator;
+    CircleIndicator3 circleIndicator;
     TextThumbSeekBar textThumbSeekBar;
 
     LvMusicViewModel lvMusicViewModel;
@@ -316,7 +315,7 @@ public class PlaySongActivity extends AppCompatActivity {
         playSongViewPagerAdapter.addFragment(new PlaySongFragment3(songItem));
         viewPager.setAdapter(playSongViewPagerAdapter);
         // set circle indicator
-//        circleIndicator.setViewPager(viewPager);
+        circleIndicator.setViewPager(viewPager);
     }
 
     private void replaceLayoutFragment(SongItem songItem, ArrayList<SongItem> songItems) {

@@ -29,6 +29,13 @@ public class AccountActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mBinding = ActivityAccountBinding.inflate(getLayoutInflater());
         setContentView(mBinding.getRoot());
+
+        setSupportActionBar(mBinding.tbAccount);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mBinding.tbAccount.setNavigationOnClickListener(view ->
+                finish()
+        );
+
         mLlAccount = mBinding.llAccount;
         initOnClickListener();
     }

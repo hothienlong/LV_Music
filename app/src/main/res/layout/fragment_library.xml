@@ -19,6 +19,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
         </TextView>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:src="@drawable/ic_next_black"/>
     </LinearLayout>
 
 
@@ -37,6 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <RelativeLayout
+                android:background="@drawable/bg_ripple_effect"
                 android:id="@+id/libLayoutUpload"
                 android:padding="10dp"
                 android:layout_width="115dp"
@@ -72,6 +79,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <RelativeLayout
+                android:background="@drawable/bg_ripple_effect"
                 android:id="@+id/libLayoutMv"
                 android:padding="10dp"
                 android:layout_width="115dp"

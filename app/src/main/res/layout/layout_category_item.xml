@@ -12,7 +12,7 @@
 
 
     <ImageView
-        android:background="@drawable/ic_noavailable"
+        android:background="@drawable/comingsoon"
         android:id="@+id/imgCategory"
         android:scaleType="fitXY"
         android:layout_width="150dp"

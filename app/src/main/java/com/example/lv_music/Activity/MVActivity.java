@@ -60,6 +60,8 @@ public class MVActivity extends AppCompatActivity {
                 }
             });
             mBinding.rvMV.setAdapter(mAdapter);
+            //animation
+            mBinding.rvMV.scheduleLayoutAnimation();
         });
         mBinding.rvMV.setHasFixedSize(true);
 

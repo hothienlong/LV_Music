@@ -2,12 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_home"
-            android:title="Trang chủ" />
-        <item
+            android:icon="@drawable/ic_account"
             android:id="@+id/nav_account"
             android:title="Tài khoản" />
         <item
+            android:icon="@drawable/ic_logout"
             android:id="@+id/nav_log_out"
             android:title="Đăng xuất" />
     </group>

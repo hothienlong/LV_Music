@@ -13,23 +13,53 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        android:text="Tài khoản"
-        android:textColor="@color/colorPrimary"
-        android:textSize="18sp"
-        android:textStyle="bold"/>
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="20dp"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:text="Tài khoản"-->
+<!--        android:textColor="@color/colorPrimary"-->
+<!--        android:textSize="18sp"-->
+<!--        android:textStyle="bold"/>-->
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/ivBigAvatar"
-        android:layout_width="175dp"
-        android:layout_height="175dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginVertical="10dp"
-        />
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/tbAccount"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="@drawable/ic_black_back_arrow"
+            app:title="Tài khoản"/>
+
+<!--    <de.hdodenhof.circleimageview.CircleImageView-->
+<!--        android:padding="20dp"-->
+<!--        android:src="@drawable/ic_user"-->
+<!--        android:id="@+id/ivBigAvatar"-->
+<!--        android:layout_width="175dp"-->
+<!--        android:layout_height="175dp"-->
+<!--        android:layout_gravity="center_horizontal"-->
+<!--        android:layout_marginVertical="10dp"-->
+<!--        />-->
+
+        <!-- padding rồi mới bo tròn -->
+        <androidx.cardview.widget.CardView
+            android:layout_marginVertical="10dp"
+            android:padding="5dp"
+            android:id="@+id/cardviewUser"
+            app:cardElevation="5dp"
+            android:layout_gravity="center_horizontal"
+            app:cardCornerRadius="180dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:background="@drawable/bg_play_song"
+                android:padding="20dp"
+                android:src="@drawable/ic_user"
+                android:id="@+id/ivBigAvatar"
+                android:layout_width="175dp"
+                android:layout_height="175dp">
+            </ImageView>
+
+        </androidx.cardview.widget.CardView>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,6 +67,7 @@
         android:orientation="vertical">
 
         <RelativeLayout
+            android:background="@drawable/bg_ripple_effect"
             android:id="@+id/rlName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -52,7 +83,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="5dp"
-                android:src="@drawable/account"
+                android:src="@drawable/ic_user"
                 />
 
             <TextView
@@ -83,6 +114,7 @@
             android:background="#919191" />
 
         <RelativeLayout
+            android:background="@drawable/bg_ripple_effect"
             android:id="@+id/rlAvatar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -98,7 +130,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="5dp"
-                android:src="@drawable/account"
+                android:src="@drawable/ic_user"
                 />
 
             <TextView
@@ -129,6 +161,7 @@
             android:background="#919191" />
 
         <RelativeLayout
+            android:background="@drawable/bg_ripple_effect"
             android:id="@+id/rlEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -144,7 +177,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="5dp"
-                android:src="@drawable/account"
+                android:src="@drawable/ic_user"
                 />
 
             <TextView
@@ -175,6 +208,7 @@
             android:background="#919191" />
 
         <RelativeLayout
+            android:background="@drawable/bg_ripple_effect"
             android:id="@+id/rlPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -190,7 +224,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="5dp"
-                android:src="@drawable/account" />
+                android:src="@drawable/ic_user" />
 
             <TextView
                 android:id="@+id/tvDarkTheme"

@@ -30,9 +30,9 @@
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/myTabLayout"
-            app:tabIndicatorColor="#B3A529"
-            app:tabSelectedTextColor="#735600"
-            app:tabTextColor="#000000"
+            app:tabIndicatorColor="@color/trongsuot"
+            app:tabSelectedTextColor="#783DCD"
+            app:tabTextColor="@color/black"
             app:tabMode="fixed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

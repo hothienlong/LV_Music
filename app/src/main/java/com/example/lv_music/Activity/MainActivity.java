@@ -53,10 +53,10 @@ public class MainActivity extends AppCompatActivity {
 //        adapter.addFragment(new AccountFragment(), "Information");
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
-        tabLayout.getTabAt(0).setIcon(R.drawable.home);
-        tabLayout.getTabAt(1).setIcon(R.drawable.song);
-        tabLayout.getTabAt(2).setIcon(R.drawable.playlist);
-        tabLayout.getTabAt(3).setIcon(R.drawable.top);
+        tabLayout.getTabAt(0).setIcon(R.drawable.ic_home);
+        tabLayout.getTabAt(1).setIcon(R.drawable.ic_song);
+        tabLayout.getTabAt(2).setIcon(R.drawable.ic_playlist);
+        tabLayout.getTabAt(3).setIcon(R.drawable.ic_top);
 //        tabLayout.getTabAt(4).setIcon(R.drawable.account);
 
         // side bar
