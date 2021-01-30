@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.lv_music.Adapter.ListSongAdapter;
 import com.example.lv_music.Model.ApiResponse;
@@ -47,6 +48,8 @@ public class SongsCategoryActivity extends AppCompatActivity {
     ImageView imgCategory;
     FloatingActionButton floatBtnRandom;
     Toolbar toolbar;
+    SwipeRefreshLayout mSwiper;
+    ListSongAdapter mListSongAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +94,10 @@ public class SongsCategoryActivity extends AppCompatActivity {
         });
         toolbar.setTitleTextColor(Color.WHITE);
 
+        mSwiper.setOnRefreshListener(() -> {
+            mListSongAdapter.notifyDataSetChanged();
+            mSwiper.setRefreshing(false);
+        });
     }
 
     private void addControls() {
@@ -99,6 +106,7 @@ public class SongsCategoryActivity extends AppCompatActivity {
         imgCategory = findViewById(R.id.imgCategory);
         floatBtnRandom = findViewById(R.id.floatBtnRandom);
         toolbar = findViewById(R.id.songsCategoryToolbar);
+        mSwiper = findViewById(R.id.spRefresh);
     }
 
     private void getData() {
@@ -112,12 +120,12 @@ public class SongsCategoryActivity extends AppCompatActivity {
 //                }
 
                 // dùng lại adapter của list song
-                ListSongAdapter listSongAdapter = new ListSongAdapter((ArrayList<SongItem>) listApiResponse.getData());
+                mListSongAdapter = new ListSongAdapter((ArrayList<SongItem>) listApiResponse.getData());
 
                 //tăng performance
                 songItemRecyclerview.setHasFixedSize(true);
 
-                songItemRecyclerview.setAdapter(listSongAdapter);
+                songItemRecyclerview.setAdapter(mListSongAdapter);
 
                 //animation
                 songItemRecyclerview.scheduleLayoutAnimation();

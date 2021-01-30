@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.lv_music.Adapter.ListSongAdapter;
 import com.example.lv_music.Model.ApiResponse;
@@ -32,6 +33,8 @@ public class ListSongFragment extends Fragment {
     LvMusicViewModel mLvMusicViewModel;
 
     RecyclerView songItemRecyclerview;
+    SwipeRefreshLayout mSwiper;
+    ListSongAdapter mListSongAdapter;
 
     @Nullable
     @Override
@@ -45,6 +48,10 @@ public class ListSongFragment extends Fragment {
     public void onStart() {
         super.onStart();
         getData();
+        mSwiper.setOnRefreshListener(() -> {
+            mListSongAdapter.notifyDataSetChanged();
+            mSwiper.setRefreshing(false);
+        });
     }
 
     private void getData() {
@@ -59,12 +66,12 @@ public class ListSongFragment extends Fragment {
 //                }
 //                Log.d("ABC",listApiResponse.getData().toString());
 
-                ListSongAdapter listSongAdapter = new ListSongAdapter((ArrayList<SongItem>) listApiResponse.getData());
+                mListSongAdapter = new ListSongAdapter((ArrayList<SongItem>) listApiResponse.getData());
 
                 //tăng performance
                 songItemRecyclerview.setHasFixedSize(true);
 
-                songItemRecyclerview.setAdapter(listSongAdapter);
+                songItemRecyclerview.setAdapter(mListSongAdapter);
 
                 //animation
                 songItemRecyclerview.scheduleLayoutAnimation();
@@ -78,5 +85,6 @@ public class ListSongFragment extends Fragment {
 
     private void addControls() {
         songItemRecyclerview = view.findViewById(R.id.songItemRecyclerview);
+        mSwiper = view.findViewById(R.id.spRefresh);
     }
 }

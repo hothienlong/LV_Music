@@ -4,23 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.MVActivity"
     android:orientation="vertical"
-    android:paddingHorizontal="5dp">
+    android:paddingHorizontal="5dp"
+    tools:context=".Activity.MVActivity">
 
     <androidx.appcompat.widget.Toolbar
-        app:title="MV"
-        app:navigationIcon="@drawable/ic_black_back_arrow"
         android:id="@+id/tbMV"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize">
-    </androidx.appcompat.widget.Toolbar>
+        android:layout_height="?attr/actionBarSize"
+        app:navigationIcon="@drawable/ic_black_back_arrow"
+        app:title="MV"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvMV"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="2"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/spRefresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:listitem="@layout/layout_mv_item"/>
+        android:layout_height="wrap_content">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvMV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layoutAnimation="@anim/layout_animation"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2"
+            tools:listitem="@layout/layout_mv_item" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </LinearLayout>

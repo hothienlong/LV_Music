@@ -1,6 +1,7 @@
 package com.example.lv_music.Fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.lv_music.Adapter.CategoryAdapter;
 import com.example.lv_music.Model.ApiResponse;
@@ -25,6 +27,7 @@ public class CategoryFragment extends Fragment {
     LvMusicViewModel mLvMusicViewModel;
     RecyclerView mRcvCategory;
 
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -33,6 +36,7 @@ public class CategoryFragment extends Fragment {
         getData();
         return view;
     }
+
 
     private void getData() {
         mLvMusicViewModel = ViewModelProviders.of(this).get(LvMusicViewModel.class);
@@ -44,7 +48,8 @@ public class CategoryFragment extends Fragment {
 //                for(int i=0;i<listApiResponse.getData().size();i++){
 //                    Log.d("BBB", listApiResponse.getData().get(i).toString());
 //                }
-                CategoryAdapter categoryAdapter = new CategoryAdapter(listApiResponse.getData());
+                 CategoryAdapter categoryAdapter = new CategoryAdapter(listApiResponse.getData());
+                Log.d("ABC",listApiResponse.getData().toString());
 
                 mRcvCategory.setHasFixedSize(true);//tăng performance
                 mRcvCategory.setAdapter(categoryAdapter);
@@ -57,5 +62,6 @@ public class CategoryFragment extends Fragment {
 
     private void addControls() {
         mRcvCategory = view.findViewById(R.id.categoryRecyclerview);
+
     }
 }

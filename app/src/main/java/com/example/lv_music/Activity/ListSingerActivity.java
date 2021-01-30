@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -27,6 +28,8 @@ public class ListSingerActivity extends AppCompatActivity {
     RecyclerView recyclerViewSinger;
     LvMusicViewModel lvMusicViewModel;
     Toolbar toolbar;
+    SwipeRefreshLayout mSwiper;
+    ListSingerAdapter mListSingerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,10 @@ public class ListSingerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_singer);
         addControls();
         getData();
+        mSwiper.setOnRefreshListener(() -> {
+            mListSingerAdapter.notifyDataSetChanged();
+            mSwiper.setRefreshing(false);
+        });
     }
 
     private void getData() {
@@ -70,12 +77,12 @@ public class ListSingerActivity extends AppCompatActivity {
 //                for(int i=0;i<singers.size();i++){
 //                    Log.d("BBB", singers.get(i).toString());
 //                }
-        ListSingerAdapter listSingerAdapter = new ListSingerAdapter(singers);
+        mListSingerAdapter = new ListSingerAdapter(singers);
 
         //tăng performance
         recyclerViewSinger.setHasFixedSize(true);
 
-        recyclerViewSinger.setAdapter(listSingerAdapter);
+        recyclerViewSinger.setAdapter(mListSingerAdapter);
 
         //animation
         recyclerViewSinger.scheduleLayoutAnimation();
@@ -84,5 +91,6 @@ public class ListSingerActivity extends AppCompatActivity {
     private void addControls() {
         recyclerViewSinger = findViewById(R.id.singerRecyclerview);
         toolbar = findViewById(R.id.listSingersToolbar);
+        mSwiper = findViewById(R.id.spRefresh);
     }
 }
