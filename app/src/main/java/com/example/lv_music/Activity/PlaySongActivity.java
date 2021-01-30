@@ -37,6 +37,7 @@ import com.example.lv_music.ViewModel.LvMusicViewModel;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.logging.Logger;
 
 import me.relex.circleindicator.CircleIndicator;
@@ -57,6 +58,9 @@ public class PlaySongActivity extends AppCompatActivity {
     Handler handlerPlayMusic = new Handler();;
     Runnable runnablePlayMusic;
     Boolean isMediaPrepared = false;
+
+    Boolean repeated = false;
+    Boolean suffled = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,9 +114,20 @@ public class PlaySongActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(playSongItems.size() > 0){
-                    pauseMusic();
                     clearMediaPlayer();
-                    position++;
+                    if(repeated == false && suffled == false){
+                        position++;
+                    }
+                    else if(suffled == true){
+                        Random random = new Random();
+                        Integer index = random.nextInt(playSongItems.size()-1);
+                        if(index == position){
+                            position++;
+                        }
+                        else {
+                            position = index;
+                        }
+                    }
                     if(position == playSongItems.size()){
                         position = 0;
                     }
@@ -127,15 +142,62 @@ public class PlaySongActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(playSongItems.size() > 0){
-                    pauseMusic();
                     clearMediaPlayer();
-                    position--;
+                    if(repeated == false && suffled == false){
+                        position--;
+                    }
+                    else if(suffled == true){
+                        Random random = new Random();
+                        Integer index = random.nextInt(playSongItems.size()-1);
+                        if(index == position){
+                            position--;
+                        }
+                        else {
+                            position = index;
+                        }
+                    }
                     if(position == -1){
                         position = playSongItems.size() - 1;
                     }
                     initLayoutFragment(playSongItems.get(position), playSongItems);
                     initLayoutActivity(playSongItems.get(position));
                     initMediaPlayer(playSongItems.get(position).getSong_link());
+                }
+            }
+        });
+
+        imgRepeat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(repeated == false){
+                    repeated = true;
+                    imgRepeat.setImageResource(R.drawable.ic_repeated);
+                    if(suffled == true){
+                        suffled = false;
+                        imgSuffle.setImageResource(R.drawable.ic_shuffle);
+                    }
+                }
+                else{
+                    repeated = false;
+                    imgRepeat.setImageResource(R.drawable.ic_repeat);
+                }
+            }
+        });
+
+        imgSuffle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(suffled == false){
+                    suffled = true;
+                    imgSuffle.setImageResource(R.drawable.ic_shuffled);
+                    if(repeated == true){
+                        repeated = false;
+                        imgRepeat.setImageResource(R.drawable.ic_repeat);
+                    }
+                }
+                else{
+                    suffled = false;
+                    imgSuffle.setImageResource(R.drawable.ic_shuffle);
                 }
             }
         });
