@@ -83,13 +83,6 @@ public class PlaySongFragment1 extends Fragment {
 
         // -- Gắn giao diện thông tin bài hát
         mLvMusicViewModel = ViewModelProviders.of(this).get(LvMusicViewModel.class);
-        // get name of song
-        mLvMusicViewModel.getResponseSong().observe(getActivity(), new Observer<ApiResponse<Song>>() {
-            @Override
-            public void onChanged(ApiResponse<Song> songApiResponse) {
-                tvSongName.setText(songApiResponse.getData().getName());
-            }
-        });
 
         // get categories of song
         mLvMusicViewModel.getResponseAllCategoriesOfSong().observe(getActivity(), new androidx.lifecycle.Observer<ApiResponse<List<Category>>>() {
@@ -102,19 +95,9 @@ public class PlaySongFragment1 extends Fragment {
             }
         });
 
-        // get singers of song
-        mLvMusicViewModel.getResponseAllSingersOfSong().observe(getActivity(), new Observer<ApiResponse<List<Singer>>>() {
-            @Override
-            public void onChanged(ApiResponse<List<Singer>> listApiResponse) {
-                List<String> singerNames = listApiResponse.getData().stream()
-                        .map(Singer::getStageName)
-                        .collect(Collectors.toList());
-                tvSingerName.setText(singerNames.toString().substring(1, singerNames.toString().length()-1));
-            }
-        });
         mLvMusicViewModel.fetchAllCategoriesOfSong(Integer.parseInt(songItem.getId()));
-//        mLvMusicViewModel.fetchAllSingersOfSong(Integer.parseInt(mSongId));
-//        mLvMusicViewModel.fetchSong(Integer.parseInt(mSongId));
+
+        tvSongName.setText(songItem.getName());
 
         List<String> singerNames = songItem.getLstSingerNames();
 

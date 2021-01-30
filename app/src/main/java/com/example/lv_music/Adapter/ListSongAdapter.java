@@ -76,7 +76,7 @@ public class ListSongAdapter extends RecyclerView.Adapter<ListSongAdapter.SongVi
                 public void onClick(View v) {
                     Intent intent = new Intent(context, PlaySongActivity.class);
                     Bundle bundle = new Bundle();
-                    bundle.putParcelable("songitem", songItem);
+                    bundle.putInt("position", position);
                     bundle.putParcelableArrayList("listsongitem", songItems);
                     intent.putExtras(bundle);
                     context.startActivity(intent);

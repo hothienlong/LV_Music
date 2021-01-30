@@ -4,7 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
+
 
 import android.content.Intent;
 import android.media.AudioAttributes;
@@ -20,6 +21,7 @@ import android.widget.SeekBar;
 import android.widget.Toast;
 
 
+import com.example.lv_music.Adapter.PlaySongViewPager2Adapter;
 import com.example.lv_music.Adapter.PlaySongViewPagerAdapter;
 import com.example.lv_music.Fragment.PlaySongFragment1;
 import com.example.lv_music.Fragment.PlaySongFragment2;
@@ -35,13 +37,15 @@ import com.example.lv_music.ViewModel.LvMusicViewModel;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.logging.Logger;
 
 import me.relex.circleindicator.CircleIndicator;
 
 public class PlaySongActivity extends AppCompatActivity {
 
-    ViewPager viewPager;
+    ViewPager2 viewPager;
+    PlaySongViewPager2Adapter playSongViewPagerAdapter;
     Toolbar toolbar;
     ImageView imgLikeSong, imgAddPlaylist, imgSuffle, imgBackward, imgPlaySong, imgForward, imgRepeat;
     CircleIndicator circleIndicator;
@@ -49,10 +53,14 @@ public class PlaySongActivity extends AppCompatActivity {
 
     LvMusicViewModel lvMusicViewModel;
     MediaPlayer mediaPlayer; //tất cả activity chỉ có 1 mediaplayer duy nhất
-    ArrayList<SongItem> songItems = new ArrayList<>();
+    ArrayList<SongItem> playSongItems = new ArrayList<>();
+    Integer position = -1;
     Handler handlerPlayMusic = new Handler();;
     Runnable runnablePlayMusic;
     Boolean isMediaPrepared = false;
+
+    Boolean repeated = false;
+    Boolean suffled = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +107,98 @@ public class PlaySongActivity extends AppCompatActivity {
             public void onStopTrackingTouch(SeekBar seekBar) {
                 handlerPlayMusic.postDelayed(runnablePlayMusic, 100);
                 mediaPlayer.seekTo(seekBar.getProgress());
+            }
+        });
+
+        imgForward.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(playSongItems.size() > 0){
+                    clearMediaPlayer();
+                    if(repeated == false && suffled == false){
+                        position++;
+                    }
+                    else if(suffled == true){
+                        Random random = new Random();
+                        Integer index = random.nextInt(playSongItems.size()-1);
+                        if(index == position){
+                            position++;
+                        }
+                        else {
+                            position = index;
+                        }
+                    }
+                    if(position == playSongItems.size()){
+                        position = 0;
+                    }
+                    initLayoutFragment(playSongItems.get(position), playSongItems);
+                    initLayoutActivity(playSongItems.get(position));
+                    initMediaPlayer(playSongItems.get(position).getSong_link());
+                }
+            }
+        });
+
+        imgBackward.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(playSongItems.size() > 0){
+                    clearMediaPlayer();
+                    if(repeated == false && suffled == false){
+                        position--;
+                    }
+                    else if(suffled == true){
+                        Random random = new Random();
+                        Integer index = random.nextInt(playSongItems.size()-1);
+                        if(index == position){
+                            position--;
+                        }
+                        else {
+                            position = index;
+                        }
+                    }
+                    if(position == -1){
+                        position = playSongItems.size() - 1;
+                    }
+                    initLayoutFragment(playSongItems.get(position), playSongItems);
+                    initLayoutActivity(playSongItems.get(position));
+                    initMediaPlayer(playSongItems.get(position).getSong_link());
+                }
+            }
+        });
+
+        imgRepeat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(repeated == false){
+                    repeated = true;
+                    imgRepeat.setImageResource(R.drawable.ic_repeated);
+                    if(suffled == true){
+                        suffled = false;
+                        imgSuffle.setImageResource(R.drawable.ic_shuffle);
+                    }
+                }
+                else{
+                    repeated = false;
+                    imgRepeat.setImageResource(R.drawable.ic_repeat);
+                }
+            }
+        });
+
+        imgSuffle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(suffled == false){
+                    suffled = true;
+                    imgSuffle.setImageResource(R.drawable.ic_shuffled);
+                    if(repeated == true){
+                        repeated = false;
+                        imgRepeat.setImageResource(R.drawable.ic_repeat);
+                    }
+                }
+                else{
+                    suffled = false;
+                    imgSuffle.setImageResource(R.drawable.ic_shuffle);
+                }
             }
         });
     }
@@ -184,7 +284,7 @@ public class PlaySongActivity extends AppCompatActivity {
             mediaPlayer.release();
             mediaPlayer = null;
             handlerPlayMusic.removeCallbacks(runnablePlayMusic);
-            Toast.makeText(this, "clear", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "clear", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -210,13 +310,22 @@ public class PlaySongActivity extends AppCompatActivity {
 
     // giao diện, thông tin, danh sách bài hát
     private void initLayoutFragment(SongItem songItem, ArrayList<SongItem> songItems) {
-        PlaySongViewPagerAdapter playSongViewPagerAdapter = new PlaySongViewPagerAdapter(getSupportFragmentManager());
+        playSongViewPagerAdapter = new PlaySongViewPager2Adapter(this,songItem,songItems);
         playSongViewPagerAdapter.addFragment(new PlaySongFragment1(songItem, songItems));
         playSongViewPagerAdapter.addFragment(new PlaySongFragment2());
         playSongViewPagerAdapter.addFragment(new PlaySongFragment3(songItem));
         viewPager.setAdapter(playSongViewPagerAdapter);
         // set circle indicator
-        circleIndicator.setViewPager(viewPager);
+//        circleIndicator.setViewPager(viewPager);
+    }
+
+    private void replaceLayoutFragment(SongItem songItem, ArrayList<SongItem> songItems) {
+        playSongViewPagerAdapter.replaceFragment(0, new PlaySongFragment1(songItem, songItems));
+        playSongViewPagerAdapter.replaceFragment(1, new PlaySongFragment2());
+        playSongViewPagerAdapter.replaceFragment(2, new PlaySongFragment3(songItem));
+        viewPager.setAdapter(playSongViewPagerAdapter);
+        // set circle indicator
+//        circleIndicator.setViewPager(viewPager);
     }
 
     public void initLayoutActivity(SongItem songItem){
@@ -260,15 +369,17 @@ public class PlaySongActivity extends AppCompatActivity {
                 // Nếu từ songs category: tất cả các bài hát trong category
                 // Nếu từ advertisement: ko có bài nào
 
-                songItems = bundle.getParcelableArrayList("listsongitem");
+                playSongItems = bundle.getParcelableArrayList("listsongitem");
             }
 
             // Lấy thông tin bài hát
-            if(intent.hasExtra("songitem")){
-                songItem = bundle.getParcelable("songitem");
-                Log.d("ABC",songItem.toString());
+            if(intent.hasExtra("position")){
+                position = bundle.getInt("position");
+                songItem = playSongItems.get(position);
+
+//                Log.d("ABC",songItem.toString());
                 // init layout before play music
-                initLayoutFragment(songItem, songItems);
+                initLayoutFragment(songItem, playSongItems);
 
                 initLayoutActivity(songItem);
 
@@ -284,7 +395,7 @@ public class PlaySongActivity extends AppCompatActivity {
                     @Override
                     public void onChanged(ApiResponse<SongItem> songItemApiResponse) {
                         // init layout before play music
-                        initLayoutFragment(songItemApiResponse.getData(), songItems);
+                        initLayoutFragment(songItemApiResponse.getData(), playSongItems);
 
                         initLayoutActivity(songItemApiResponse.getData());
 
