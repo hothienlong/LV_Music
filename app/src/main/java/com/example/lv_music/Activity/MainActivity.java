@@ -8,6 +8,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -70,6 +71,10 @@ public class MainActivity extends AppCompatActivity {
 
                             // Add code here to update the UI based on the item selected
                             // For example, swap UI fragments here
+                            if(menuItem.getItemId()==R.id.nav_account){
+                                Intent intent = new Intent(MainActivity.this,AccountActivity.class);
+                                startActivity(intent);
+                            }
 
                             return true;
                         }

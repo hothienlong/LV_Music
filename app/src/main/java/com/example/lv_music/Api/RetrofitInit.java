@@ -96,8 +96,8 @@ public class RetrofitInit {
         mRetrofit = new Retrofit.Builder()
 //                .baseUrl("https://longmusic.000webhostapp.com/")
 //                .baseUrl("https://10.0.2.2/")
-                .baseUrl("http://192.168.0.7:8080/")
-//                .baseUrl("http://192.168.1.87:8080/")
+//                .baseUrl("http://192.168.0.7:8080/")
+                .baseUrl("http://192.168.1.87:8080/")
                 .addConverterFactory(GsonConverterFactory.create(gson)) //convert json -> java
                 .addCallAdapterFactory((RxJava3CallAdapterFactory.create()))
                 .client(okHttpClient)
