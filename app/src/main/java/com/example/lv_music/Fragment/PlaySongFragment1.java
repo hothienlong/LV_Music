@@ -68,7 +68,6 @@ public class PlaySongFragment1 extends Fragment {
     // dùng map parse từ List<Object> -> List<Atribute of Obj>
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void init() {
-
         // -- Gắn giao diện recyclerview
         ListSongAdapter listSongAdapter = new ListSongAdapter(songItems);
 
@@ -79,7 +78,6 @@ public class PlaySongFragment1 extends Fragment {
 
         //animation
         songItemRecyclerview.scheduleLayoutAnimation();
-
 
         // -- Gắn giao diện thông tin bài hát
         mLvMusicViewModel = ViewModelProviders.of(this).get(LvMusicViewModel.class);

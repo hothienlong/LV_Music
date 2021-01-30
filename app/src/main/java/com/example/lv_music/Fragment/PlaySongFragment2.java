@@ -33,7 +33,7 @@ public class PlaySongFragment2 extends Fragment {
     }
 
     private void addControls() {
-        Toast.makeText(getActivity(), "disc", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getActivity(), "disc", Toast.LENGTH_SHORT).show();
         imgDisc = view.findViewById(R.id.imgDisc);
         animator = ObjectAnimator.ofFloat(imgDisc, "rotation", 0f, 360f);
         animator.setDuration(10000);

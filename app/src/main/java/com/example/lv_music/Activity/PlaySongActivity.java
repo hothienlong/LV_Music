@@ -76,13 +76,11 @@ public class PlaySongActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(mediaPlayer != null){
-                    if(isMediaPrepared == true){
-                        if(!mediaPlayer.isPlaying()){
-                            playMusic();
-                        }
-                        else {
-                            pauseMusic();
-                        }
+                    if(!mediaPlayer.isPlaying()){
+                        playMusic();
+                    }
+                    else {
+                        pauseMusic();
                     }
                 }
             }
@@ -114,6 +112,8 @@ public class PlaySongActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(playSongItems.size() > 0){
                     clearMediaPlayer();
+
+                    blockUI();
                     if(repeated == false && suffled == false){
                         position++;
                     }
@@ -130,9 +130,18 @@ public class PlaySongActivity extends AppCompatActivity {
                     if(position == playSongItems.size()){
                         position = 0;
                     }
-                    initLayoutFragment(playSongItems.get(position), playSongItems);
+                    replaceLayoutFragment(playSongItems.get(position), playSongItems);
                     initLayoutActivity(playSongItems.get(position));
                     initMediaPlayer(playSongItems.get(position).getSong_link());
+
+                    // Ngừng 4s mới đc bấm tiếp (ngăn tạo ra nhiều thread)
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            unBlockUI();
+                        }
+                    }, 4000);
                 }
             }
         });
@@ -142,6 +151,8 @@ public class PlaySongActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(playSongItems.size() > 0){
                     clearMediaPlayer();
+
+                    blockUI();
                     if(repeated == false && suffled == false){
                         position--;
                     }
@@ -158,9 +169,18 @@ public class PlaySongActivity extends AppCompatActivity {
                     if(position == -1){
                         position = playSongItems.size() - 1;
                     }
-                    initLayoutFragment(playSongItems.get(position), playSongItems);
+                    replaceLayoutFragment(playSongItems.get(position), playSongItems);
                     initLayoutActivity(playSongItems.get(position));
                     initMediaPlayer(playSongItems.get(position).getSong_link());
+
+                    // Ngừng 4s mới đc bấm tiếp (ngăn tạo ra nhiều thread)
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            unBlockUI();
+                        }
+                    }, 4000);
                 }
             }
         });
@@ -227,10 +247,23 @@ public class PlaySongActivity extends AppCompatActivity {
         addEvents();
     }
 
+    private void blockUI(){
+        imgForward.setEnabled(false);
+        imgBackward.setEnabled(false);
+        textThumbSeekBar.setEnabled(false);
+        imgPlaySong.setEnabled(false);
+    }
+
+    private void unBlockUI(){
+        imgForward.setEnabled(true);
+        imgBackward.setEnabled(true);
+        textThumbSeekBar.setEnabled(true);
+        imgPlaySong.setEnabled(true);
+    }
+
 
     private void initMediaPlayer(String url) {
-
-        new Thread(new Runnable() {
+        Thread threadInitPlayer = new Thread(new Runnable() {
             @Override
             public void run() {
                 clearMediaPlayer();
@@ -248,6 +281,9 @@ public class PlaySongActivity extends AppCompatActivity {
                             @Override
                             public void onPrepared(MediaPlayer mp) {
                                 isMediaPrepared = true;
+                                unBlockUI();
+                                seekBarTime();
+                                playMusic(); //có prepare nên lâu => lag giao diện
                             }
                         });
                         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
@@ -264,10 +300,9 @@ public class PlaySongActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
-                seekBarTime();
-                playMusic(); //có prepare nên lâu => lag giao diện
             }
-        }).start();
+        });
+        threadInitPlayer.start();
 
     }
 
@@ -283,12 +318,13 @@ public class PlaySongActivity extends AppCompatActivity {
             mediaPlayer.release();
             mediaPlayer = null;
             handlerPlayMusic.removeCallbacks(runnablePlayMusic);
+
 //            Toast.makeText(this, "clear", Toast.LENGTH_SHORT).show();
         }
     }
 
     private void playMusic(){
-        if(mediaPlayer != null){
+        if(mediaPlayer != null && isMediaPrepared == true){
             mediaPlayer.start();
             imgPlaySong.setImageResource(R.drawable.ic_pause_button);
             // cập nhật time song
@@ -299,7 +335,7 @@ public class PlaySongActivity extends AppCompatActivity {
     }
 
     private void pauseMusic(){
-        if(mediaPlayer != null){
+        if(mediaPlayer != null && isMediaPrepared == true){
             mediaPlayer.pause();
             handlerPlayMusic.postDelayed(runnablePlayMusic, 100);
             imgPlaySong.setImageResource(R.drawable.ic_play_button);
@@ -351,6 +387,8 @@ public class PlaySongActivity extends AppCompatActivity {
         imgForward = findViewById(R.id.imgForward);
         imgRepeat = findViewById(R.id.imgRepeat);
         textThumbSeekBar = findViewById(R.id.textSeekbarPlaySong);
+
+        blockUI();
     }
 
     private void catchIntent() {
