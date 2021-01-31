@@ -301,10 +301,22 @@ public class PlaySongActivity extends AppCompatActivity {
                                 finish();
                             }
                         });
+                        mediaPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+                            @Override
+                            public boolean onError(MediaPlayer mp, int what, int extra) {
+                                clearMediaPlayer();
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(PlaySongActivity.this, "Bạn thực hiện quá nhiều tác vụ", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                                return true;
+                            }
+                        });
                         mediaPlayer.setDataSource(url);
                         mediaPlayer.prepare(); // might take long! (for buffering, etc)
-//                Toast.makeText(this, "play", Toast.LENGTH_SHORT).show();
-                    } catch (IOException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
@@ -367,8 +379,6 @@ public class PlaySongActivity extends AppCompatActivity {
         playSongViewPagerAdapter.replaceFragment(1, new PlaySongFragment2());
         playSongViewPagerAdapter.replaceFragment(2, new PlaySongFragment3(songItem));
         viewPager.setAdapter(playSongViewPagerAdapter);
-        // set circle indicator
-//        circleIndicator.setViewPager(viewPager);
     }
 
     public void initLayoutActivity(SongItem songItem){
