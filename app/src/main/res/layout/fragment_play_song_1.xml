@@ -137,18 +137,17 @@
             </ImageView>
         </LinearLayout>
 
-<!--        <fragment-->
-<!--            android:tag="playsong1"-->
-<!--            android:id="@+id/fragmentListSong"-->
-<!--            android:name="com.example.lv_music.Fragment.ListSongFragment"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            tools:layout="@layout/fragment_list_song">-->
-<!--        </fragment>-->
+        <!--        <fragment-->
+        <!--            android:tag="playsong1"-->
+        <!--            android:id="@+id/fragmentListSong"-->
+        <!--            android:name="com.example.lv_music.Fragment.ListSongFragment"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            tools:layout="@layout/fragment_list_song">-->
+        <!--        </fragment>-->
 
-        <ScrollView
-            android:nestedScrollingEnabled="false"
-
+        <androidx.core.widget.NestedScrollView
+            android:fillViewport="true"
             android:layout_weight="1"
             android:scrollbars="none"
             android:layout_width="match_parent"
@@ -163,9 +162,9 @@
                 android:orientation="vertical"
                 android:id="@+id/songItemRecyclerview"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
             </androidx.recyclerview.widget.RecyclerView>
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
 
     </LinearLayout>
 
