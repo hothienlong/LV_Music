@@ -71,6 +71,13 @@ public class PlaySongActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        catchIntent();
+        addEvents();
+    }
+
     private void addEvents() {
         imgPlaySong.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -188,38 +195,46 @@ public class PlaySongActivity extends AppCompatActivity {
         imgRepeat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(repeated == false){
-                    repeated = true;
-                    imgRepeat.setImageResource(R.drawable.ic_repeated);
-                    if(suffled == true){
-                        suffled = false;
-                        imgSuffle.setImageResource(R.drawable.ic_shuffle);
-                    }
-                }
-                else{
-                    repeated = false;
-                    imgRepeat.setImageResource(R.drawable.ic_repeat);
-                }
+                repeatClick();
             }
         });
 
         imgSuffle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(suffled == false){
-                    suffled = true;
-                    imgSuffle.setImageResource(R.drawable.ic_shuffled);
-                    if(repeated == true){
-                        repeated = false;
-                        imgRepeat.setImageResource(R.drawable.ic_repeat);
-                    }
-                }
-                else{
-                    suffled = false;
-                    imgSuffle.setImageResource(R.drawable.ic_shuffle);
-                }
+                randomClick();
             }
         });
+    }
+
+    private void repeatClick() {
+        if(repeated == false){
+            repeated = true;
+            imgRepeat.setImageResource(R.drawable.ic_repeated);
+            if(suffled == true){
+                suffled = false;
+                imgSuffle.setImageResource(R.drawable.ic_shuffle);
+            }
+        }
+        else{
+            repeated = false;
+            imgRepeat.setImageResource(R.drawable.ic_repeat);
+        }
+    }
+
+    private void randomClick() {
+        if(suffled == false){
+            suffled = true;
+            imgSuffle.setImageResource(R.drawable.ic_shuffled);
+            if(repeated == true){
+                repeated = false;
+                imgRepeat.setImageResource(R.drawable.ic_repeat);
+            }
+        }
+        else{
+            suffled = false;
+            imgSuffle.setImageResource(R.drawable.ic_shuffle);
+        }
     }
 
     private void upDateTimeSong() {
@@ -238,13 +253,6 @@ public class PlaySongActivity extends AppCompatActivity {
             }
         };
         handlerPlayMusic.postDelayed(runnablePlayMusic, 100);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        catchIntent();
-        addEvents();
     }
 
     private void blockUI(){
@@ -414,6 +422,9 @@ public class PlaySongActivity extends AppCompatActivity {
                 position = bundle.getInt("position");
                 songItem = playSongItems.get(position);
 
+                // phát ngẫu nhiên
+                randomClick();
+
 //                Log.d("ABC",songItem.toString());
                 // init layout before play music
                 initLayoutFragment(songItem, playSongItems);
@@ -421,7 +432,7 @@ public class PlaySongActivity extends AppCompatActivity {
                 initLayoutActivity(songItem);
 
                 initMediaPlayer(songItem.getSong_link());
-//                Log.d("ABC",songItem.getSong_link());
+
             }
             else if(intent.hasExtra("advertisement")) {
 
@@ -431,14 +442,15 @@ public class PlaySongActivity extends AppCompatActivity {
                 lvMusicViewModel.getResponseSongItem().observe(this, new Observer<ApiResponse<SongItem>>() {
                     @Override
                     public void onChanged(ApiResponse<SongItem> songItemApiResponse) {
+                        // phát vòng lặp
+                        repeatClick();
+
                         // init layout before play music
                         initLayoutFragment(songItemApiResponse.getData(), playSongItems);
 
                         initLayoutActivity(songItemApiResponse.getData());
 
                         initMediaPlayer(songItemApiResponse.getData().getSong_link());
-//                        Log.d("ABC",songItemApiResponse.getData().getSong_link());
-
                     }
                 });
                 lvMusicViewModel.fetchSongItem(Integer.parseInt(songId));

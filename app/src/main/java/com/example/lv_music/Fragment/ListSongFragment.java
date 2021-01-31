@@ -1,11 +1,9 @@
 package com.example.lv_music.Fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,7 +15,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.lv_music.Adapter.ListSongAdapter;
 import com.example.lv_music.Model.ApiResponse;
-import com.example.lv_music.Model.Song;
 import com.example.lv_music.Model.SongItem;
 import com.example.lv_music.R;
 import com.example.lv_music.ViewModel.LvMusicViewModel;
@@ -75,6 +72,10 @@ public class ListSongFragment extends Fragment {
 
                 //animation
                 songItemRecyclerview.scheduleLayoutAnimation();
+
+                if(getParentFragment() instanceof ListSongPageFragment){
+                    ((ListSongPageFragment) getParentFragment()).RandomSong((ArrayList<SongItem>) listApiResponse.getData());
+                }
 
             }
         });

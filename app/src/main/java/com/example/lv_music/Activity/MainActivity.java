@@ -13,17 +13,13 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.example.lv_music.Adapter.MainViewPagerAdapter;
-import com.example.lv_music.Fragment.AccountFragment;
 import com.example.lv_music.Fragment.HomeFragment;
 import com.example.lv_music.Fragment.ListSongPageFragment;
 import com.example.lv_music.Fragment.PlaylistFragment;
-import com.example.lv_music.Fragment.ListSongFragment;
 import com.example.lv_music.Fragment.TopListFragment;
 import com.example.lv_music.R;
-import com.example.lv_music.ViewModel.LvMusicViewModel;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
-import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -104,4 +100,5 @@ public class MainActivity extends AppCompatActivity {
         mDrawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
     }
+
 }

@@ -12,6 +12,7 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -36,6 +37,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.logging.Logger;
 
 // tương tự như list song fragment & fragment_list_song
@@ -129,6 +131,20 @@ public class SongsCategoryActivity extends AppCompatActivity {
 
                 //animation
                 songItemRecyclerview.scheduleLayoutAnimation();
+
+                floatBtnRandom.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(SongsCategoryActivity.this, PlaySongActivity.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putParcelableArrayList("listsongitem", (ArrayList<? extends Parcelable>) listApiResponse.getData());
+                        Integer position = new Random().nextInt(listApiResponse.getData().size()-1);
+                        bundle.putInt("position", position);
+                        bundle.putBoolean("isRandom", true);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                    }
+                });
             }
         });
 
