@@ -117,39 +117,7 @@ public class PlaySongActivity extends AppCompatActivity {
         imgForward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(playSongItems.size() > 0){
-                    clearMediaPlayer();
-
-                    blockUI();
-                    if(repeated == false && suffled == false){
-                        position++;
-                    }
-                    else if(suffled == true){
-                        Random random = new Random();
-                        Integer index = random.nextInt(playSongItems.size()-1);
-                        if(index == position){
-                            position++;
-                        }
-                        else {
-                            position = index;
-                        }
-                    }
-                    if(position == playSongItems.size()){
-                        position = 0;
-                    }
-                    replaceLayoutFragment(playSongItems.get(position), playSongItems);
-                    initLayoutActivity(playSongItems.get(position));
-                    initMediaPlayer(playSongItems.get(position).getSong_link());
-
-                    // Ngừng 4s mới đc bấm tiếp (ngăn tạo ra nhiều thread)
-                    Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            unBlockUI();
-                        }
-                    }, 4000);
-                }
+                forwardClick();
             }
         });
 
@@ -205,6 +173,42 @@ public class PlaySongActivity extends AppCompatActivity {
                 randomClick();
             }
         });
+    }
+
+    private void forwardClick() {
+        if(playSongItems.size() > 0){
+            clearMediaPlayer();
+
+            blockUI();
+            if(repeated == false && suffled == false){
+                position++;
+            }
+            else if(suffled == true){
+                Random random = new Random();
+                Integer index = random.nextInt(playSongItems.size()-1);
+                if(index == position){
+                    position++;
+                }
+                else {
+                    position = index;
+                }
+            }
+            if(position == playSongItems.size()){
+                position = 0;
+            }
+            replaceLayoutFragment(playSongItems.get(position), playSongItems);
+            initLayoutActivity(playSongItems.get(position));
+            initMediaPlayer(playSongItems.get(position).getSong_link());
+
+            // Ngừng 4s mới đc bấm tiếp (ngăn tạo ra nhiều thread)
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    unBlockUI();
+                }
+            }, 4000);
+        }
     }
 
     private void repeatClick() {
@@ -297,8 +301,8 @@ public class PlaySongActivity extends AppCompatActivity {
                         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                             @Override
                             public void onCompletion(MediaPlayer mp) {
-                                clearMediaPlayer();
-                                finish();
+                                // Bấm nút chuyển bài
+                                forwardClick();
                             }
                         });
                         mediaPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener() {
