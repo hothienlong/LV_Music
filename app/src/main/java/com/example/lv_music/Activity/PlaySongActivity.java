@@ -423,7 +423,9 @@ public class PlaySongActivity extends AppCompatActivity {
                 songItem = playSongItems.get(position);
 
                 // phát ngẫu nhiên
-                randomClick();
+                if(intent.hasExtra("isRandom")){
+                    randomClick();
+                }
 
 //                Log.d("ABC",songItem.toString());
                 // init layout before play music
