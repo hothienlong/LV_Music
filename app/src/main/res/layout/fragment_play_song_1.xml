@@ -89,6 +89,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp">
                     <ImageView
+                        android:background="@drawable/bg_ripple_effect"
+                        android:id="@+id/imgLikeSong"
                         android:src="@drawable/ic_disheart"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">

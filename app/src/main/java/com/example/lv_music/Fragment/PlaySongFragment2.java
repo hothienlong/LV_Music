@@ -21,7 +21,7 @@ public class PlaySongFragment2 extends Fragment {
 
     ImageView imgDisc;
     View view;
-    static ObjectAnimator animator;
+    public static ObjectAnimator animator;
 
     @Nullable
     @Override
@@ -43,10 +43,12 @@ public class PlaySongFragment2 extends Fragment {
     }
 
     public static void discStart(){
-        animator.start();
+        if(animator != null)
+            animator.start();
     }
 
     public static void discPause(){
-        animator.pause();
+        if(animator != null)
+            animator.pause();
     }
 }

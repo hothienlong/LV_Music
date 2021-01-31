@@ -173,6 +173,20 @@ public class PlaySongActivity extends AppCompatActivity {
                 randomClick();
             }
         });
+
+        imgLikeSong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(PlaySongActivity.this, "Tính năng đang được phát triển", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        imgAddPlaylist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(PlaySongActivity.this, "Tính năng đang được phát triển", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void forwardClick() {
@@ -264,6 +278,8 @@ public class PlaySongActivity extends AppCompatActivity {
         imgBackward.setEnabled(false);
         textThumbSeekBar.setEnabled(false);
         imgPlaySong.setEnabled(false);
+//        imgLikeSong.setEnabled(false);
+//        imgAddPlaylist.setEnabled(false);
     }
 
     private void unBlockUI(){
@@ -271,6 +287,8 @@ public class PlaySongActivity extends AppCompatActivity {
         imgBackward.setEnabled(true);
         textThumbSeekBar.setEnabled(true);
         imgPlaySong.setEnabled(true);
+//        imgLikeSong.setEnabled(true);
+//        imgAddPlaylist.setEnabled(true);
     }
 
 
@@ -354,7 +372,7 @@ public class PlaySongActivity extends AppCompatActivity {
             // cập nhật time song
             upDateTimeSong();
 
-        PlaySongFragment2.discStart();
+            PlaySongFragment2.discStart();
         }
     }
 
@@ -364,7 +382,8 @@ public class PlaySongActivity extends AppCompatActivity {
             handlerPlayMusic.postDelayed(runnablePlayMusic, 100);
             imgPlaySong.setImageResource(R.drawable.ic_play_button);
 
-        PlaySongFragment2.discPause();
+            if(PlaySongFragment2.animator != null)
+                PlaySongFragment2.discPause();
         }
     }
 

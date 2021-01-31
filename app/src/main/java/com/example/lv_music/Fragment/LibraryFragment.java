@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -44,6 +45,13 @@ public class LibraryFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), MVActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        libLayoutUpload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "Tính năng đang được phát triển", Toast.LENGTH_SHORT).show();
             }
         });
     }

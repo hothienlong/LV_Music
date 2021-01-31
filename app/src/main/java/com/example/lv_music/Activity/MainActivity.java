@@ -11,6 +11,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.lv_music.Adapter.MainViewPagerAdapter;
 import com.example.lv_music.Fragment.HomeFragment;
@@ -65,9 +66,12 @@ public class MainActivity extends AppCompatActivity {
 
                             // Add code here to update the UI based on the item selected
                             // For example, swap UI fragments here
-                            if(menuItem.getItemId()==R.id.nav_account){
+                            if(menuItem.getItemId() == R.id.nav_account){
                                 Intent intent = new Intent(MainActivity.this,AccountActivity.class);
                                 startActivity(intent);
+                            }
+                            else if(menuItem.getItemId() == R.id.nav_log_out){
+                                Toast.makeText(MainActivity.this, "Tính năng đang được phát triển", Toast.LENGTH_SHORT).show();
                             }
 
                             return true;

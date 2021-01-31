@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:background="#0027FF"
+    android:background="@drawable/bg_play_song"
     android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textColor="@color/white"
+        android:text="Tính năng đang được phát triển"
+        android:textSize="40sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </TextView>
+
+</LinearLayout>

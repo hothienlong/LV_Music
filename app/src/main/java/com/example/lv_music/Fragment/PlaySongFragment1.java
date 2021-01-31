@@ -6,7 +6,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,7 +35,7 @@ import java.util.stream.Collectors;
 public class PlaySongFragment1 extends Fragment {
 
     View view;
-//    Fragment fragment;
+    ImageView imgLikeSong;
     TextView tvSongName, tvSingerName, tvCategoryName, tvNumLike;
     RecyclerView songItemRecyclerview;
     ArrayList<SongItem> songItems;
@@ -55,7 +57,17 @@ public class PlaySongFragment1 extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_play_song_1, null);
         addControls();
+        addEvents();
         return view;
+    }
+
+    private void addEvents() {
+        imgLikeSong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "Tính năng đang được phát triển", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -103,6 +115,7 @@ public class PlaySongFragment1 extends Fragment {
     }
 
     private void addControls() {
+        imgLikeSong = view.findViewById(R.id.imgLikeSong);
         tvSingerName = view.findViewById(R.id.tvSingerName);
         tvSongName = view.findViewById(R.id.tvSongName);
         tvCategoryName = view.findViewById(R.id.tvCategoryName);

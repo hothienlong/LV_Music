@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.lv_music.Fragment.BottomSheetFragment;
 import com.example.lv_music.Fragment.ChangeInfoFragment;
@@ -38,6 +39,8 @@ public class AccountActivity extends AppCompatActivity {
 
         mLlAccount = mBinding.llAccount;
         initOnClickListener();
+
+        Toast.makeText(this, "Tính năng đang được phát triển", Toast.LENGTH_SHORT).show();
     }
 
     private void initOnClickListener() {

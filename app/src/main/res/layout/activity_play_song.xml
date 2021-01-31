@@ -55,6 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageView
+                android:background="@drawable/bg_ripple_effect"
                 android:id="@+id/imgLikeSong"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_disheart"
@@ -76,6 +77,7 @@
             </com.example.lv_music.TextThumbSeekBar>
 
             <ImageView
+                android:background="@drawable/bg_ripple_effect"
                 android:id="@+id/imgAddPlaylist"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_addplaylist"
