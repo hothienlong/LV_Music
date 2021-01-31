@@ -14,7 +14,7 @@ import android.view.MenuItem;
 
 import com.example.lv_music.Adapter.MainViewPagerAdapter;
 import com.example.lv_music.Fragment.HomeFragment;
-import com.example.lv_music.Fragment.ListSongPageFragment;
+import com.example.lv_music.Fragment.ListSongFragment;
 import com.example.lv_music.Fragment.PlaylistFragment;
 import com.example.lv_music.Fragment.TopListFragment;
 import com.example.lv_music.R;
@@ -35,15 +35,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         addControls();
         init();
-
-
     }
 
     private void init() {
         // viewpager & tab layout
         MainViewPagerAdapter adapter = new MainViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new HomeFragment(), "Home");
-        adapter.addFragment(new ListSongPageFragment(), "Song");
+        adapter.addFragment(new ListSongFragment(), "Song");
         adapter.addFragment(new PlaylistFragment(), "Play list");
         adapter.addFragment(new TopListFragment(), "Top list");
 //        adapter.addFragment(new AccountFragment(), "Information");

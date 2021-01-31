@@ -1,24 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/spRefresh"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/spRefresh"
+    <!-- Để swipe bên trong bao quanh recyclerview sẽ bị mất tính năng Nestedscroll -->
+    <androidx.core.widget.NestedScrollView
+        android:paddingHorizontal="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/songItemRecyclerview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="10dp"
-            android:layoutAnimation="@anim/layout_animation"
+        <LinearLayout
+            android:paddingHorizontal="5dp"
+            android:gravity="center"
+            android:paddingBottom="10dp"
+            android:id="@+id/linearlayout"
             android:orientation="vertical"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/layout_list_song_item" />
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-</RelativeLayout>
+            <Button
+                android:layout_centerHorizontal="true"
+                android:id="@+id/btnRandom"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="@drawable/bg_btn_random"
+                android:layout_marginTop="10dp"
+                android:text="Phát ngẫu nhiên"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </Button>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/songItemRecyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
+                android:layoutAnimation="@anim/layout_animation"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/layout_list_song_item" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
