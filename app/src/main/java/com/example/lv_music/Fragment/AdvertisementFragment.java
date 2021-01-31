@@ -22,6 +22,7 @@ import com.example.lv_music.Model.ApiResponse;
 import com.example.lv_music.R;
 import com.example.lv_music.ViewModel.LvMusicViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import me.relex.circleindicator.CircleIndicator;
@@ -38,7 +39,7 @@ public class AdvertisementFragment extends Fragment {
     int currentItem = 0;
     Handler handler;
     Runnable runnable;
-    List<Advertisement> mAdvertisements;
+    List<Advertisement> mAdvertisements = new ArrayList<>();
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {

@@ -40,8 +40,6 @@ public class PlaySongFragment2 extends Fragment {
         animator.setRepeatCount(ObjectAnimator.INFINITE);
         animator.setInterpolator(new LinearInterpolator());
         // set all the animation-related stuff you want (interpolator etc.)
-//        animator.start();
-        discStart();
     }
 
     public static void discStart(){

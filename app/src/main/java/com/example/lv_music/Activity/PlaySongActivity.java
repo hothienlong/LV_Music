@@ -354,7 +354,7 @@ public class PlaySongActivity extends AppCompatActivity {
             // cập nhật time song
             upDateTimeSong();
 
-//        PlaySongFragment2.discStart();
+        PlaySongFragment2.discStart();
         }
     }
 
@@ -363,7 +363,8 @@ public class PlaySongActivity extends AppCompatActivity {
             mediaPlayer.pause();
             handlerPlayMusic.postDelayed(runnablePlayMusic, 100);
             imgPlaySong.setImageResource(R.drawable.ic_play_button);
-//        PlaySongFragment2.discPause();
+
+        PlaySongFragment2.discPause();
         }
     }
 
