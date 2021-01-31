@@ -16,58 +16,113 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface ApiRequest {
-//    @GET("Server/all_songs.php")
-//    Maybe<ApiResponse<List<Song>>> getAllSongs();
-    // song
-    @GET("apiLV_Music/all_songs.php")
+
+    // ------------------------- 000webhost ---------------------------
+    @GET("Server/all_songs.php")
     Maybe<ApiResponse<List<Song>>> getAllSongs();
-    
+
     @FormUrlEncoded // parse sang dạng form để gửi lên
-    @POST("apiLV_Music/all_songs_category.php")
+    @POST("Server/all_songs_category.php")
     Maybe<ApiResponse<List<Song>>> getAllSongsCategory(
             @Field("cate_id") Integer cate_id
     );
 
     @FormUrlEncoded // parse sang dạng form để gửi lên
-    @POST("apiLV_Music/song.php")
+    @POST("Server/song.php")
     Maybe<ApiResponse<Song>> getSong(
             @Field("id") Integer id
     );
 
     // advertisement
-    @GET("apiLV_Music/all_advertisements.php")
+    @GET("Server/all_advertisements.php")
     Maybe<ApiResponse<List<Advertisement>>> getAllAdvertisements();
 
     // category
-    @GET("apiLV_Music/all_categories.php")
+    @GET("Server/all_categories.php")
     Maybe<ApiResponse<List<Category>>> getAllCategories();
     @FormUrlEncoded // parse sang dạng form để gửi lên
-    @POST("apiLV_Music/all_categories_song.php")
+    @POST("Server/all_categories_song.php")
     Maybe<ApiResponse<List<Category>>> getAllCategoriesOfSong(
             @Field("song_id") Integer song_id
     );
 
     // song item
-    @GET("apiLV_Music/all_song_items.php")
+    @GET("Server/all_song_items.php")
     Maybe<ApiResponse<List<SongItem>>> getAllSongItems();
     @FormUrlEncoded // parse sang dạng form để gửi lên
-    @POST("apiLV_Music/all_song_items_category.php")
+    @POST("Server/all_song_items_category.php")
     Maybe<ApiResponse<List<SongItem>>> getAllSongItemsCategory(
             @Field("cate_id") Integer cate_id
     );
     @FormUrlEncoded // parse sang dạng form để gửi lên
-    @POST("apiLV_Music/songitem.php")
+    @POST("Server/songitem.php")
     Maybe<ApiResponse<SongItem>> getSongItem(
             @Field("song_id") Integer song_id
     );
 
     // singer
-    @GET("apiLV_Music/all_singers.php")
+    @GET("Server/all_singers.php")
     Maybe<ApiResponse<List<Singer>>> getAllSingers();
 
     @FormUrlEncoded // parse sang dạng form để gửi lên
-    @POST("apiLV_Music/all_singers_song.php")
+    @POST("Server/all_singers_song.php")
     Maybe<ApiResponse<List<Singer>>> getAllSingersOfSong(
             @Field("song_id") Integer song_id
     );
+
+
+
+    // ------------------------- Local ---------------------------
+//    // song
+//    @GET("apiLV_Music/all_songs.php")
+//    Maybe<ApiResponse<List<Song>>> getAllSongs();
+//
+//    @FormUrlEncoded // parse sang dạng form để gửi lên
+//    @POST("apiLV_Music/all_songs_category.php")
+//    Maybe<ApiResponse<List<Song>>> getAllSongsCategory(
+//            @Field("cate_id") Integer cate_id
+//    );
+//
+//    @FormUrlEncoded // parse sang dạng form để gửi lên
+//    @POST("apiLV_Music/song.php")
+//    Maybe<ApiResponse<Song>> getSong(
+//            @Field("id") Integer id
+//    );
+//
+//    // advertisement
+//    @GET("apiLV_Music/all_advertisements.php")
+//    Maybe<ApiResponse<List<Advertisement>>> getAllAdvertisements();
+//
+//    // category
+//    @GET("apiLV_Music/all_categories.php")
+//    Maybe<ApiResponse<List<Category>>> getAllCategories();
+//    @FormUrlEncoded // parse sang dạng form để gửi lên
+//    @POST("apiLV_Music/all_categories_song.php")
+//    Maybe<ApiResponse<List<Category>>> getAllCategoriesOfSong(
+//            @Field("song_id") Integer song_id
+//    );
+//
+//    // song item
+//    @GET("apiLV_Music/all_song_items.php")
+//    Maybe<ApiResponse<List<SongItem>>> getAllSongItems();
+//    @FormUrlEncoded // parse sang dạng form để gửi lên
+//    @POST("apiLV_Music/all_song_items_category.php")
+//    Maybe<ApiResponse<List<SongItem>>> getAllSongItemsCategory(
+//            @Field("cate_id") Integer cate_id
+//    );
+//    @FormUrlEncoded // parse sang dạng form để gửi lên
+//    @POST("apiLV_Music/songitem.php")
+//    Maybe<ApiResponse<SongItem>> getSongItem(
+//            @Field("song_id") Integer song_id
+//    );
+//
+//    // singer
+//    @GET("apiLV_Music/all_singers.php")
+//    Maybe<ApiResponse<List<Singer>>> getAllSingers();
+//
+//    @FormUrlEncoded // parse sang dạng form để gửi lên
+//    @POST("apiLV_Music/all_singers_song.php")
+//    Maybe<ApiResponse<List<Singer>>> getAllSingersOfSong(
+//            @Field("song_id") Integer song_id
+//    );
 }

@@ -81,21 +81,27 @@ public class RetrofitInit {
         }
     }
 
+    private OkHttpClient getOkHttpClient(){
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .connectTimeout(30, TimeUnit.SECONDS)
+                .writeTimeout(30, TimeUnit.SECONDS)
+                .retryOnConnectionFailure(true) //khởi tạo lại nếu dữ liệu bị hư
+                .protocols(Arrays.asList(Protocol.HTTP_1_1)) //định tuyến đường dẫn ngắn nhất (các ứng dụng thường 1.1)
+                .build();
+        return okHttpClient;
+    }
+
     private Retrofit init() {
         Gson gson = new GsonBuilder().setLenient().create();
 
-//        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-//                .connectTimeout(30, TimeUnit.SECONDS)
-//                .writeTimeout(30, TimeUnit.SECONDS)
-//                .retryOnConnectionFailure(true) //khởi tạo lại nếu dữ liệu bị hư
-//                .protocols(Arrays.asList(Protocol.HTTP_1_1)) //định tuyến đường dẫn ngắn nhất (các ứng dụng thường 1.1)
-//                .build();
 
-        OkHttpClient okHttpClient = getUnsafeOkHttpClient();
+//        OkHttpClient okHttpClient = getUnsafeOkHttpClient();
+        OkHttpClient okHttpClient = getOkHttpClient();
+
 
         mRetrofit = new Retrofit.Builder()
-//                .baseUrl("https://longmusic.000webhostapp.com/")
-                .baseUrl("https://10.0.2.2/")
+                .baseUrl("https://longmusic.000webhostapp.com/")
+//                .baseUrl("https://10.0.2.2/")
 //                .baseUrl("http://192.168.0.7:8080/")
 //                .baseUrl("http://192.168.1.87:8080/")
                 .addConverterFactory(GsonConverterFactory.create(gson)) //convert json -> java
